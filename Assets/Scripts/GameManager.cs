@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
             return _hud = obj.GetComponent<HUDManager>();
         }
     }
-
     public PlayerController Player {
         get {
             //The player already exists
@@ -45,6 +44,7 @@ public class GameManager : MonoBehaviour
             return _player = obj.GetComponent<PlayerController>();
         }
     }
+
     //Functions
     private void Awake() {
         //Creates a Singleton of the GameManager

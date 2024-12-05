@@ -30,11 +30,11 @@ public class HUDManager : MonoBehaviour
         get => _chatManager != null ? _chatManager : transform.Find("Dialogue").GetComponent<DialogueManager>();
     }
 
-    private void Start() {
+    private void Awake() {
         Init();
     }
 
-    private void Init() {
+    public void Init() {
         ToolTip.text = "";              //Turns off the Text of the Tool Tip
         OpenMenu(0);                    //Closes the other menues except for the HUD
     }
@@ -49,6 +49,6 @@ public class HUDManager : MonoBehaviour
     }
     public void OpenDialogue(NPC npc) {
         OpenMenu(1);
-        ChatManager.OpenDialogue(npc);
+        ChatManager.InitializeDialogue(npc);
     }
 }
