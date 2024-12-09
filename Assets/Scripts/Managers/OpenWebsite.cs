@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class OpenWebsite : MonoBehaviour
 {
     // Choose URL to website?
-    private string websiteURL = "https://awsdevchallenge.devpost.com/?ref_feature=challenge&ref_medium=discover";
+    private string websiteURL = "https://www.amazon.com";
 
     // Function to open 
     public void OpenWebsiteFunc()
