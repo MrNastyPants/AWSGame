@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 942b103cf86b89f4fa097fa52b80ec1f
+  - enabled: 1
+    path: Assets/Scenes/Grandma's House.unity
+    guid: 87e225558db4bdb4da32d2f597cb5b0d
+  - enabled: 1
+    path: Assets/Scenes/Outside.unity
+    guid: 0dbb5a609ff18c5409fd0baa5b182297
   m_configObjects: {}

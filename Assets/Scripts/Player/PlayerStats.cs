@@ -30,6 +30,13 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    [Header("Camera Clipping")]
+    [SerializeField] protected LayerMask _wallMask;
+    [SerializeField] protected List<RaycastHit> _blockingObjects = new List<RaycastHit>();
+    [SerializeField] protected Transform _camera {
+        get => GameManager.Manager.Camera.transform;
+    }
+
     [Header("References")]
     [SerializeField] private Animator _anim;
 

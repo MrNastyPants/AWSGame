@@ -17,4 +17,8 @@ public class LevelManager{
         //Changes the Scene of the Game
         SceneManager.LoadScene(scene);
     }
+    public void ChangeScene(string scene) {
+        //Changes the Scene of the Game
+        SceneManager.LoadScene(scene);
+    }
 }

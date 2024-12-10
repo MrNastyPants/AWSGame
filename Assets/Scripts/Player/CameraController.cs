@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour
 {
     [Header("General Camera Stats")]
     [SerializeField] private GameObject _target;
+    [SerializeField] private Vector3 _offset; 
 
     private void LateUpdate() {
         //Follows the target
@@ -14,8 +15,8 @@ public class CameraController : MonoBehaviour
 
     //Follows the target
     private void FollowTarget() {
-        var newPos = new Vector3(_target.transform.position.x, _target.transform.position.y, -10);
-        float speed = 0.25f + Vector2.Distance(newPos, transform.position);
-        transform.position = Vector3.MoveTowards(transform.position, newPos, speed * Time.deltaTime);
+        //Follows the Position
+        var newPos = _target.transform.position + _offset;
+        transform.position = Vector3.MoveTowards(transform.position, newPos, 1);
     }
 }

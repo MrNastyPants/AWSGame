@@ -11,8 +11,9 @@ public class GameManager : MonoBehaviour
     public LevelManager LevelManager = new LevelManager();
 
     [Header("References")]
-    public HUDManager _hud;
-    public PlayerController _player;
+    private HUDManager _hud;
+    private PlayerController _player;
+    private CameraController _camera;
 
     //Properties
     public HUDManager HUD {
@@ -42,6 +43,19 @@ public class GameManager : MonoBehaviour
             //Creates a new player
             var obj = GameObject.Instantiate(Resources.Load<GameObject>("Player")); 
             return _player = obj.GetComponent<PlayerController>();
+        }
+    }
+    public CameraController Camera {
+        get {
+            //The player already exists
+            if (_camera != null) return _camera;
+
+            //Finds the player out in the real world
+            if (GameObject.Find("Main Camera") != null) return _camera = GameObject.Find("Main Camera").GetComponent<CameraController>();
+
+            //Creates a new player
+            var obj = GameObject.Instantiate(Resources.Load<GameObject>("Main Camera"));
+            return _camera = obj.GetComponent<CameraController>();
         }
     }
 

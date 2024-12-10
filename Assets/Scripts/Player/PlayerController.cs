@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : PlayerStats
@@ -33,22 +34,23 @@ public class PlayerController : PlayerStats
         if (moving || (horizontal == 0 && vertical == 0)) return;
 
         //Creates the new direction
-        Vector3Int newDir = vertical == 0 ? new Vector3Int(horizontal > 0f ? 1 : -1, 0, 0) : new Vector3Int(0, vertical > 0f ? 1 : -1, 0);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(newDir.x, newDir.y), 1, collisionMask);
+        Vector3Int newDir = vertical == 0 ? new Vector3Int(horizontal > 0f ? 1 : -1, 0, 0) : new Vector3Int(0, 0, vertical > 0f ? 1 : -1);
 
         //Interactable Item Detected
-        if (hit.collider && hit.collider.GetComponent<Interactable>() != null) Interactor = hit.collider.gameObject;
-        else Interactor = null;
+        if (Physics.Raycast(transform.position + (Vector3.up * 0.25f), newDir, out var hit, 1, collisionMask)) {
+            if(hit.collider.GetComponent<Interactable>() != null) Interactor = hit.collider.gameObject;
+            return;
+        }
 
-        //Moves towards the new direction
-        if (hit.collider == null) {
-            //Starts the Movement
-            StartCoroutine(Move(newDir));
+        //Sets the Interactor to Null
+        Interactor = null;
 
-            //Sets the Animation
-            Anim.SetFloat("SpeedX", newDir.x);
-            Anim.SetFloat("SpeedY", newDir.y);
-        } 
+        //Starts the Movement
+        StartCoroutine(Move(newDir));
+
+        //Sets the Animation
+        Anim.SetFloat("SpeedX", newDir.x);
+        Anim.SetFloat("SpeedY", newDir.z);
     }
 
     public IEnumerator Move(Vector3Int direction) {
@@ -68,11 +70,30 @@ public class PlayerController : PlayerStats
         //Sets the position to the target
         transform.position = target;
 
-        //Updates the Order in layer if the Y direction moved
-        if(direction.y != 0)
-            transform.Find("Mesh").GetComponent<SpriteRenderer>().sortingOrder = 0 - Mathf.RoundToInt(transform.position.y);
-
-        //Turns off the walking animation
+        //Finished up Moving
+        DoneMoving();
+    }
+    private void DoneMoving() {
+        //Sets Values
         moving = false;
+
+        //Checks the Camera to make sure nothing is blocking it
+        var direction = (_camera.position - transform.position).normalized;
+        var allBlocks = Physics.BoxCastAll(transform.position + (Vector3.up * 0.5f) + direction, new Vector3(0.45f, 1.5f, 1), direction, 
+            Quaternion.identity, Vector3.Distance(transform.position, _camera.position), _wallMask);
+
+        //Removes the old ones
+        foreach (RaycastHit obj in _blockingObjects) {
+            //Continues if it was hit again
+            if (allBlocks.Contains(obj)) continue;
+
+            //Respawns the object
+            obj.transform.GetComponent<MeshRenderer>().enabled = true;
+        }
+
+        foreach (RaycastHit obj in allBlocks) {
+            obj.transform.GetComponent<MeshRenderer>().enabled = false;
+            _blockingObjects.Add(obj);
+        }
     }
 }
