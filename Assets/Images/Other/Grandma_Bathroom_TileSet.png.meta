@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ce180777ad5da3e49a3fa07e26acffb7
+guid: 3abfea859e5e0664ca779b569d99f50e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -119,7 +119,91 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: House_0
+      name: BathroomTile_Right
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25f5a188cec52534dad9b1d83da307d6
+      internalID: -1335731692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BathroomTile_Top
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ab8666cfccbb074d8607bafe3ec7c39
+      internalID: 1234149301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BathroomTile_Left
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7d8748923feea649b75108bf7bbfb83
+      internalID: -1407097958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BathroomTile_Bottom
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 302714aade3bd314292706d665bf9ad5
+      internalID: 1996167750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BathroomTile_Whole
       rect:
         serializedVersion: 2
         x: 0
@@ -133,14 +217,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a46cb5b3b59023248a7df7ee26dda61a
-      internalID: 423034347
+      spriteID: 8d92e9a231298a742a6c7a6f879b23ad
+      internalID: -131540591
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House_1
+      name: Divider_Half_Bottom
       rect:
         serializedVersion: 2
         x: 32
@@ -154,14 +238,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a455a4b9558e3f4bb0c493597a6346b
-      internalID: -1984812630
+      spriteID: e7e491c80b30cad469353cd2899087bc
+      internalID: 1583451184
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House_2
+      name: Divider_Half_Up
       rect:
         serializedVersion: 2
         x: 64
@@ -175,14 +259,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9f44d4ddf9fe614e818d540783a7494
-      internalID: 1196474531
+      spriteID: 7bd87154ffdea0244850877ca1c3cb4c
+      internalID: 706653626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House_3
+      name: Divider_Half_Left
       rect:
         serializedVersion: 2
         x: 0
@@ -196,14 +280,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7b347a68e6fa074ba5eb42f516489e9
-      internalID: 198645077
+      spriteID: 19cc97d55705261489f4af530f08caf0
+      internalID: -2092459232
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House_4
+      name: Divider_Half_Right
       rect:
         serializedVersion: 2
         x: 32
@@ -217,14 +301,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0d23035f1332c54babbcaed14cbd25f
-      internalID: -1190830755
+      spriteID: 8dfbe8a8340031945b72ae6b0aca71d4
+      internalID: -108606622
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House_5
+      name: Divider_Thick_Bottom
       rect:
         serializedVersion: 2
         x: 64
@@ -238,14 +322,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be3f329dff70c1144b28a901f36efd92
-      internalID: 1777703083
+      spriteID: 496af02864b0ace49b8aa12508d33a38
+      internalID: -1630402553
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House_6
+      name: Divider_Thick_Right
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bde978a0a888d284c87d1eb1f1829577
+      internalID: 435234534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Divider_Thick_Vertical
       rect:
         serializedVersion: 2
         x: 0
@@ -259,14 +364,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d34655ad8391eb3489947ddee454f202
-      internalID: 612088447
+      spriteID: 6d795bfddf4ec984bae8de07adc30dca
+      internalID: 1197211430
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House_7
+      name: Divider_Thick_Horizontal
       rect:
         serializedVersion: 2
         x: 32
@@ -280,14 +385,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d65eca5344227254c83b7214e4c472fe
-      internalID: 1924281199
+      spriteID: 54ef0ccc3d6c7014690b657dd715bd4d
+      internalID: 1973374065
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House_8
+      name: Divider_Thick_Top
       rect:
         serializedVersion: 2
         x: 64
@@ -301,8 +406,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a99891146b895d42b55cf203991957b
-      internalID: 1066154568
+      spriteID: 1ace0705454d05e4b9858be3ebd41b44
+      internalID: 257653784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Divider_Thick_Left
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa683f24a226f8c48a478eea0601f8ac
+      internalID: 1454674713
       vertices: []
       indices: 
       edges: []
@@ -318,15 +444,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      House_0: 423034347
-      House_1: -1984812630
-      House_2: 1196474531
-      House_3: 198645077
-      House_4: -1190830755
-      House_5: 1777703083
-      House_6: 612088447
-      House_7: 1924281199
-      House_8: 1066154568
+      BathroomTile_Bottom: 1996167750
+      BathroomTile_Left: -1407097958
+      BathroomTile_Right: -1335731692
+      BathroomTile_Top: 1234149301
+      BathroomTile_Whole: -131540591
+      Divider_Half_Bottom: 1583451184
+      Divider_Half_Left: -2092459232
+      Divider_Half_Right: -108606622
+      Divider_Half_Up: 706653626
+      Divider_Thick_Bottom: -1630402553
+      Divider_Thick_Horizontal: 1973374065
+      Divider_Thick_Left: 1454674713
+      Divider_Thick_Right: 435234534
+      Divider_Thick_Top: 257653784
+      Divider_Thick_Vertical: 1197211430
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

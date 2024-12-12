@@ -79,7 +79,7 @@ public class PlayerController : PlayerStats
 
         //Checks the Camera to make sure nothing is blocking it
         var direction = (_camera.position - transform.position).normalized;
-        var allBlocks = Physics.BoxCastAll(transform.position + (Vector3.up * 0.5f) + direction, new Vector3(0.45f, 1.5f, 1), direction, 
+        var allBlocks = Physics.BoxCastAll(transform.position + (Vector3.up * 0.5f) + direction, new Vector3(1f, 1.5f, 1), direction, 
             Quaternion.identity, Vector3.Distance(transform.position, _camera.position), _wallMask);
 
         //Removes the old ones
@@ -88,11 +88,15 @@ public class PlayerController : PlayerStats
             if (allBlocks.Contains(obj)) continue;
 
             //Respawns the object
-            obj.transform.GetComponent<MeshRenderer>().enabled = true;
+            obj.transform.GetComponent<WallHider>().HideWalls(false);
         }
 
         foreach (RaycastHit obj in allBlocks) {
-            obj.transform.GetComponent<MeshRenderer>().enabled = false;
+            //Checks to see if it has the component
+            if (!obj.transform.GetComponent<WallHider>()) continue;
+
+            //Hides the Walls and adds it to the object
+            obj.transform.GetComponent<WallHider>().HideWalls(true);
             _blockingObjects.Add(obj);
         }
     }
