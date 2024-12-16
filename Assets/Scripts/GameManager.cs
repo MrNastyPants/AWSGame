@@ -70,6 +70,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private bool _currentFocus = true;
+    private bool FocusChange {
+        get {
+            bool current = Application.isFocused;
+
+            //Returns false if it's the same value
+            if (current == _currentFocus) return false;
+
+            //Not open
+            if (!current) return _currentFocus = current;
+
+            return _currentFocus = current;
+        }
+    }
+
     //Public Functions
     public void StartDialogue(NPC npc) {
         //Starts the dialogue
