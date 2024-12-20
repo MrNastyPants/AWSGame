@@ -48,9 +48,8 @@ public class PlayerController : PlayerStats
         //Starts the Movement
         StartCoroutine(Move(newDir));
 
-        //Sets the Animation
-        Anim.SetFloat("SpeedX", newDir.x);
-        Anim.SetFloat("SpeedY", newDir.z);
+        //Sets the Mesh Rotation
+        Mesh.transform.rotation = Quaternion.LookRotation(newDir);
     }
 
     public IEnumerator Move(Vector3Int direction) {

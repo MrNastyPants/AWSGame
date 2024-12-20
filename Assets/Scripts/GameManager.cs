@@ -85,6 +85,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void FixedUpdate() {
+        if (FocusChange) {
+            string amazonDesc = GUIUtility.systemCopyBuffer;
+            print(amazonDesc);
+        }
+    }
+
     //Public Functions
     public void StartDialogue(NPC npc) {
         //Starts the dialogue

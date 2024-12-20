@@ -39,10 +39,14 @@ public class PlayerStats : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Animator _anim;
+    [SerializeField] private GameObject _mesh;
 
     //Properties
+    protected GameObject Mesh {
+        get => _mesh != null ? _mesh : _mesh = transform.Find("Mesh").gameObject;
+    }
     protected Animator Anim {
-        get => _anim != null ? _anim : _anim = transform.Find("Mesh").GetComponent<Animator>();
+        get => _anim != null ? _anim : _anim = transform.Find("Mesh/Skeleton").GetComponent<Animator>();
     }
     
 }
