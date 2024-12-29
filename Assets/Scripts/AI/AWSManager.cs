@@ -11,10 +11,9 @@ using Amazon.BedrockRuntime;
 
 public static class AWSManager
 {
-    public static string AIFinal;
+    public static string AIFinal = "NA";
     public static async void Titan(string Prompt, string ModelId, AmazonBedrockRuntimeClient client)
     {
-        AIFinal = "NA";
         Prompt = "inputText: " + Prompt + " Assistant:";
 
         // Create the request for the rating
@@ -50,8 +49,9 @@ public static class AWSManager
             {
                 var result = ratingModelResponse["results"][0];  // Get the first result
                 AIResponse = result["outputText"]?.ToString()?.Trim();
-                Debug.Log(AIResponse);
+                
                 AIFinal = AIResponse;
+                Debug.Log("AIFINAL:" + AIFinal);
             }
 
             // Check if we received valid responses

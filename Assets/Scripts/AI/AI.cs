@@ -42,51 +42,54 @@ public class AI : MonoBehaviour{
     }
 
     public void SendPrompt(string playerInput) {
+        //Runs the Speech Prompt
+        Speech(playerInput);
+    }
 
+    private void Speech(string playerInput) {
+        string speechPrompt = $"Background: {characterBackground}\n" +
+                      $"Character: {characterName}, Traits: {characterTraits}\n" +
+                      $"Scenario: {scenarioDescription}\n" +
+                      $"Player Input: {playerInput}\n\n" +
+                      $"Instructions: Generate one sentence of the character's speech in response to the player's input. Keep the response brief and to the point.";
+
+        //Sends the Prompt to the AI
+        AWSManager.Titan(speechPrompt, ModelId, client);
+        StartCoroutine(checkprompt(0, playerInput));
+
+    }
+    private void Rating(string playerInput) {
         string ratingPrompt = $"Background: {characterBackground}\n" +
                               $"Character: {characterName}, Traits: {characterTraits}\n" +
                               $"Scenario: {scenarioDescription}\n" +
                               $"Player Input: {playerInput}\n\n" +
                               $"Instructions: Generate a number from 1 to 10 to indicate how effective the player input item is for dealing with the scenario. Return the number with no additional text.";
 
-        string speechPrompt = $"Background: {characterBackground}\n" +
-                              $"Character: {characterName}, Traits: {characterTraits}\n" +
-                              $"Scenario: {scenarioDescription}\n" +
-                              $"Player Input: {playerInput}\n\n" +
-                              $"Instructions: Generate one sentence of the character's speech in response to the player's input. Keep the response brief and to the point.";
-
-        promptnumber = 0;
-        AWSManager.Titan(speechPrompt, ModelId, client);
-        StartCoroutine(checkprompt(promptnumber));
-
-        promptnumber = 1;
         AWSManager.Titan(ratingPrompt, ModelId, client);
-        StartCoroutine(checkprompt(promptnumber));
-
+        StartCoroutine(checkprompt(1, playerInput));
     }
 
-    public void recieveprompt(string response, int number) { 
+    public void recieveprompt(string response, int number, string playerInput) { 
         if (number == 0)
         {
             responseText.text = response;
+            Rating(playerInput);
         }
         else if (number == 1){
             ratingText.text = response;
         }
     }
     
-    private IEnumerator checkprompt(int number) {
+    private IEnumerator checkprompt(int number, string playerInput) {
         while (AWSManager.AIFinal == "NA")
-        {
-            Debug.Log(AWSManager.AIFinal);
-            if (AWSManager.AIFinal != "NA")
-            {
-                recieveprompt(AWSManager.AIFinal, number);
-                Debug.Log(AWSManager.AIFinal);
-                break;
-            }
-            yield return new WaitForSeconds(0.001f);
-        }
+            yield return new WaitForEndOfFrame();
+        
+        //Resets the Variables
+        string temp = AWSManager.AIFinal;
+        AWSManager.AIFinal = "NA";
+
+        //Calls the next Function
+        recieveprompt(temp, number, playerInput);
 
     }
 }
