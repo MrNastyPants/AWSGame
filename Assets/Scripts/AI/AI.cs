@@ -68,19 +68,21 @@ public class AI : MonoBehaviour{
     public void recieveprompt(string response, int number) { 
         if (number == 0)
         {
-            responseText.text = AWSManager.AIFinal;
+            responseText.text = response;
         }
         else if (number == 1){
-            ratingText.text = AWSManager.AIFinal;
+            ratingText.text = response;
         }
     }
     
     private IEnumerator checkprompt(int number) {
         while (AWSManager.AIFinal == "NA")
         {
+            Debug.Log(AWSManager.AIFinal);
             if (AWSManager.AIFinal != "NA")
             {
                 recieveprompt(AWSManager.AIFinal, number);
+                Debug.Log(AWSManager.AIFinal);
                 break;
             }
             yield return new WaitForSeconds(0.001f);

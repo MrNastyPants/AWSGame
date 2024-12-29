@@ -11,7 +11,7 @@ using Amazon.BedrockRuntime;
 
 public static class AWSManager
 {
-    public static string AIFinal = "NA";
+    public static string AIFinal;
     public static async void Titan(string Prompt, string ModelId, AmazonBedrockRuntimeClient client)
     {
         AIFinal = "NA";
@@ -49,13 +49,15 @@ public static class AWSManager
             if (ratingModelResponse["results"] != null && ratingModelResponse["results"].HasValues)
             {
                 var result = ratingModelResponse["results"][0];  // Get the first result
-                AIFinal = result["outputText"]?.ToString()?.Trim();
+                AIResponse = result["outputText"]?.ToString()?.Trim();
+                Debug.Log(AIResponse);
+                AIFinal = AIResponse;
             }
 
             // Check if we received valid responses
             if (!string.IsNullOrEmpty(AIResponse))
             {
-                AIResponse = AIFinal;
+                AIFinal = AIResponse;
             }
         }
         catch (Exception ex)
