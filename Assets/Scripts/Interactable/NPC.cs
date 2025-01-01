@@ -9,7 +9,7 @@ public class NPC : Interactable{
 
     [Header("References")]
     [SerializeField] private GameObject _alertBox;
-    [SerializeField] public List<Dialogue> DialogueTree = new List<Dialogue>();
+    [SerializeField] public ResponseOutPut response;
 
     //Properties
     protected GameObject AlertBox {
@@ -24,7 +24,7 @@ public class NPC : Interactable{
 
     public override void Interact() {
         //Opens up the dialogue box
-        GameManager.Manager.StartDialogue(this);
+        GameManager.Manager.StartDialogue(response);
     }
     public override void Hover() {
         AlertBox.SetActive(true);

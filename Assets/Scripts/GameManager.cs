@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
     private PlayerController _player;
     private CameraController _camera;
 
+    [Header("Inventory")]
+    [SerializeField] public Item heldItem;
+    [SerializeField] public float PlayerMoney = 0;
+
     //Properties
     public HUDManager HUD {
         get {
@@ -93,10 +97,10 @@ public class GameManager : MonoBehaviour
     }
 
     //Public Functions
-    public void StartDialogue(NPC npc) {
+    public void StartDialogue(ResponseOutPut npc) {
         //Starts the dialogue
         Player.CanMove = false;             //Stops the player from moving
-        HUD.OpenDialogue(npc);                    //Opens the dialogue window
+        HUD.OpenDialogue(npc);              //Opens the dialogue window
     }
     public void StopDialogue() { 
         //Stops the dialogue

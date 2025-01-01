@@ -12401,57 +12401,7 @@ MonoBehaviour:
   itemName: Grandma
   NPCName: Grandma
   _alertBox: {fileID: 0}
-  DialogueTree:
-  - Name: Grandma
-    Text: What's up, bitch?
-    Response1: 
-    Option1: 0
-    Response2: 
-    Option2: 0
-    Response3: 
-    Option3: 0
-  - Name: Grandma
-    Text: Why you not saying anything pussy?
-    Response1: 
-    Option1: 0
-    Response2: 
-    Option2: 0
-    Response3: 
-    Option3: 0
-  - Name: Grandma
-    Text: When I was your age, I really wanted to do something with my life. It really
-      seems like you did absolutley nothing with yours, you dumb piece of shit. Fuck
-      you! Your mother a hoe.
-    Response1: 
-    Option1: 0
-    Response2: 
-    Option2: 0
-    Response3: 
-    Option3: 0
-  - Name: Grandma
-    Text: Are you a bitch, or what?
-    Response1: Yes. Sorry.
-    Option1: 5
-    Response2: No. Fuck you!
-    Option2: 1
-    Response3: Holy Moly!
-    Option3: 2
-  - Name: Grandma
-    Text: If you are seeing this, then you fucked up the code.
-    Response1: 
-    Option1: 0
-    Response2: 
-    Option2: 0
-    Response3: 
-    Option3: 0
-  - Name: Grandma
-    Text: 'I know, dumbass. '
-    Response1: 
-    Option1: 0
-    Response2: 
-    Option2: 0
-    Response3: 
-    Option3: 0
+  response: {fileID: 11400000, guid: 44056c069a5fb1e478f32ac5e5018a8b, type: 2}
 --- !u!136 &7613998481604420348
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -12554,7 +12504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3173417107453946268, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4584629777791351541, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
       propertyPath: m_IsActive

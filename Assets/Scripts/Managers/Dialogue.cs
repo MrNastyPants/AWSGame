@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using UnityEngine;
+
 [System.Serializable]
 public class Dialogue{
 
@@ -14,4 +17,14 @@ public class Dialogue{
 
     public string Response3 = "";
     public int Option3 = 0; 
+
+    //Alt Options
+    public bool isEnd = false;
+    public bool AIResponse = false;
+    public float giveMoney = 0;
+
+    //Meta Data
+    public List<Vector2Int> Prior = new List<Vector2Int>();
+    public List<Vector2Int> Next = new List<Vector2Int>();
+
 }
