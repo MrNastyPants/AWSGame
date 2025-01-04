@@ -7,7 +7,6 @@ public class Door : Interactable{
     [Header("General Door Stats")]
     [SerializeField] private string _sceneName = "";
     [SerializeField] private bool _isLocked = false;
-    [SerializeField] private int _keyID = 0;            //0 Means it doesn't require a key
 
     //Interacts with the object
     public override void Interact() {

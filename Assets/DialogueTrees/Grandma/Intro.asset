@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3761baca96e56b84ab23c5bb55d32b8f, type: 3}
+  m_Name: Intro
+  m_EditorClassIdentifier: 
+  OutPutResponse:
+  - Name: Grandma
+    Text: Sweetheart! You are here! I am so happy to see you.
+    Response1: 
+    Option1: 1
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior: []
+    Next:
+    - {x: 1, y: 0}
+  - Name: you
+    Text: grandma, you ordered me on amazon?! how did you even do that?
+    Response1: 
+    Option1: 2
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 0, y: 0}
+    Next:
+    - {x: 2, y: 0}
+  - Name: grandma
+    Text: OH, dear! I asked you here because my cats have run off. i have grown tired
+      of searching for them and needed some help. will you help me dear?
+    Response1: sure...
+    Option1: 3
+    Response2: No.
+    Option2: 4
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 1, y: 0}
+    Next:
+    - {x: 3, y: 1}
+    - {x: 4, y: 2}
+  - Name: grandma
+    Text: 'excellent! Here is $30.00 Use it to find me some food on amazon and keep
+      the change. '
+    Response1: 
+    Option1: 0
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 1
+    AIResponse: 0
+    giveMoney: 30
+    Prior:
+    - {x: 2, y: 1}
+    - {x: 4, y: 1}
+    Next: []
+  - Name: grandma
+    Text: beg your pardon?
+    Response1: sure...
+    Option1: 3
+    Response2: no.
+    Option2: 4
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 2, y: 2}
+    - {x: 4, y: 2}
+    Next:
+    - {x: 4, y: 2}
+    - {x: 3, y: 1}
+  Positions:
+  - {x: -230.40625, y: 758.6875}
+  - {x: 219.59375, y: 758.6875}
+  - {x: 669.59375, y: 758.6875}
+  - {x: 1278.2188, y: 814.375}
+  - {x: 1281.5938, y: 485.3125}

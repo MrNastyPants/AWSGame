@@ -32,9 +32,7 @@ public class AI : MonoBehaviour{
 
     private AmazonBedrockRuntimeClient client;
     private static readonly RegionEndpoint RegionEndpoint = RegionEndpoint.USEast1;
-    private const string ModelId = "amazon.titan-text-premier-v1:0";
 
-    private int promptnumber = 0;
     private void Awake() {
         var credentials = new BasicAWSCredentials(accessKeyId, secretAccessKey);
         client = new AmazonBedrockRuntimeClient(credentials, RegionEndpoint);
@@ -54,7 +52,7 @@ public class AI : MonoBehaviour{
                       $"Instructions: Generate one sentence of the character's speech in response to the player's input. Keep the response brief and to the point.";
 
         //Sends the Prompt to the AI
-        AWSManager.Titan(speechPrompt, ModelId, client);
+        //AWSManager.Titan(speechPrompt, ModelId, client);
         StartCoroutine(checkprompt(0, playerInput));
 
     }
@@ -65,7 +63,7 @@ public class AI : MonoBehaviour{
                               $"Player Input: {playerInput}\n\n" +
                               $"Instructions: Generate a number from 1 to 10 to indicate how effective the player input item is for dealing with the scenario. Return the number with no additional text.";
 
-        AWSManager.Titan(ratingPrompt, ModelId, client);
+        //AWSManager.Titan(ratingPrompt, ModelId, client);
         StartCoroutine(checkprompt(1, playerInput));
     }
 

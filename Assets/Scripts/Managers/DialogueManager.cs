@@ -1,5 +1,6 @@
+using Amazon.BedrockRuntime;
+using System;
 using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,7 +40,11 @@ public class DialogueManager : MonoBehaviour {
     [SerializeField] private bool _optionsOpened = false;
     [SerializeField] private bool _exitAfter = false;
     [SerializeField] private string _specialComment = "";
+    [SerializeField] private int _responseRating = -1;
     [SerializeField] Coroutine _typingCoroutine;
+
+    [Header("AI Variables")]
+    private AmazonBedrockRuntimeClient client;
 
     //Controls the Dialogue Window
     private void Update() {
@@ -55,9 +60,12 @@ public class DialogueManager : MonoBehaviour {
         }
 
     }
+    private void Awake() {
+        client = AWSManager.TurnOnAI();
+    }
 
-    //Initializes the Dialogue tree
-    public void InitializeDialogue(ResponseOutPut response) {
+    //Initializes and controls the Dialogue tree
+    public void InitializeDialogue(ResponseOutPut response, NPCPrompt prompt) {
         //Exits because nothing was sent over
         if (response == null || response.OutPutResponse.Count == 0) {
             StopDialogue();
@@ -73,18 +81,23 @@ public class DialogueManager : MonoBehaviour {
         _finishedTyping = false;
         _exitAfter = false;
         _specialComment = "";
+        _responseRating = -1;
+
+        //Sends in the Info to get the AI Response
+        if (GameManager.Manager.heldItem != null && GameManager.Manager.heldItem.Name != "" && prompt._runPrompt) CallTheAI(prompt);
 
         //Runs the Dialogue
         NextDialogue(0);
     }
-    public void StopDialogue() {
-        GameManager.Manager.StopDialogue();
+    public void StopDialogue() {      
+        //Stops Everything
+        GameManager.Manager.StopDialogue(_responseRating);
     }
     private void StateMachine(int ID) {
         //Stops the typing co-routine and sets the text to the full text
         if (!_finishedTyping) {
             StopCoroutine(_typingCoroutine);
-            MainText.text = _specialComment != "" ? _specialComment : _currentResponse.OutPutResponse[ID].Text;
+            MainText.text = _currentResponse.OutPutResponse[ID].AIResponse ? _specialComment : _currentResponse.OutPutResponse[ID].Text;
             _finishedTyping = true;
             return;
         }
@@ -101,31 +114,34 @@ public class DialogueManager : MonoBehaviour {
             return;
         }
 
+        //Checks the Response Rating and sets the pass fail parameters
+        int nextOp = _currentResponse.OutPutResponse[ID].Option1;
+        if (_currentResponse.OutPutResponse[ID].AIResponse)
+            nextOp = _responseRating > 5 ? _currentResponse.OutPutResponse[ID].Option1 : _currentResponse.OutPutResponse[ID].Option2;
+
         //Continues on to the next Dialogue Branch
-        NextDialogue(_currentResponse.OutPutResponse[ID].Option1);
+        NextDialogue(nextOp);
     }
     private void NextDialogue(int ID) {
         //Checks the Current ID
         _currentID = ID;
-        _specialComment = "";
 
-        //Gives the Money if there is any
+        //Gives the player Money if there is any
         if (_currentResponse.OutPutResponse[ID].giveMoney != 0) GivePlayerMoney(_currentResponse.OutPutResponse[ID].giveMoney);
 
         //Starts the typing
         Name.text = _currentResponse.OutPutResponse[ID].Name;
         string speech = _currentResponse.OutPutResponse[ID].Text;
 
-        //Checks to see if there is an AI response
+        //Checks to see if there is an AI response and if not check to see if there were options
         if (_currentResponse.OutPutResponse[ID].AIResponse) speech = AIResponse();
+        else _openOptions = _currentResponse.OutPutResponse[ID].Response1 != "";
 
         //Starts typing
         _typingCoroutine = StartCoroutine(TypeText(speech));
-
-        //Checks to see if there were Options
-        _openOptions = _currentResponse.OutPutResponse[ID].Response1 != "";
     }
 
+    //Types in the text
     IEnumerator TypeText(string text) {
         //Initializes Variables
         var newString = "";
@@ -208,18 +224,48 @@ public class DialogueManager : MonoBehaviour {
         }
     }
 
-    //Alternate Options
+    //AI Functions
+    private void CallTheAI(NPCPrompt prompt) {
+        //Calls the Ai
+        print("Calling the AI");
+
+        //Sets the Variables
+        string finalPrompt = AWSManager.BuildPrompt(prompt, GameManager.Manager.heldItem.Name);
+        string scorePrompt = AWSManager.BuildRating(prompt, GameManager.Manager.heldItem.Name);
+        _specialComment = "";
+        _responseRating = -1;
+
+        //Sends the Information to the AI and awaits for a response
+        AWSManager.Titan(finalPrompt, client, ReceiveAIInput);
+        AWSManager.Titan(scorePrompt, client, ReceiveAIScore, true);
+    }
     private void GivePlayerMoney(float Amount) {
         GameManager.Manager.PlayerMoney += Amount;
         GameManager.Manager.HUD.UpdateMoney(GameManager.Manager.PlayerMoney);
     }
+    private string ExtractDigits(string text) {
+        return string.Join("", System.Text.RegularExpressions.Regex.Matches(text, @"\d+"));
+    }
     private string AIResponse() {
         //Checks to see if they are holding an item. 
-        if (GameManager.Manager.heldItem.Name == "") {
+        if (_specialComment == "") {
             _exitAfter = true;
             return _specialComment = "You aren't holding anything. Come back when you have something for me!";
         }
 
-        return _specialComment = "This is gonna be typed in by an AI. If you are reading this, something went wrong. :(";
+        return _specialComment;
+    }
+
+    //External Functions
+    public void ReceiveAIInput() {
+        _specialComment = AWSManager.AIFinal;
+    }
+    public void ReceiveAIScore() {
+        //Retreives the number from the Score
+        string score = AWSManager.AIScore;
+
+        //Checks to make sure there is only digits left and parses it into an int
+        string temp = ExtractDigits(score);
+        _responseRating = int.Parse(temp);
     }
 }

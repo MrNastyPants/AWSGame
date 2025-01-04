@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3761baca96e56b84ab23c5bb55d32b8f, type: 3}
-  m_Name: Grandma_01
+  m_Name: Passed_03
   m_EditorClassIdentifier: 
   OutPutResponse:
   - Name: grandma
-    Text: you a bitch
+    Text: have you found them?
     Response1: 
     Option1: 1
     Response2: 
@@ -28,53 +28,19 @@ MonoBehaviour:
     Next:
     - {x: 1, y: 0}
   - Name: grandma
-    Text: you a motherfucking bitch
-    Response1: fuck you!
-    Option1: 1
-    Response2: suck my dick
-    Option2: 2
-    Response3: ok.
-    Option3: 3
-    isEnd: 0
+    Text: i called the police already but they just keep hanging up on me now.
+    Response1: 
+    Option1: 0
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 1
     AIResponse: 0
     giveMoney: 0
     Prior:
     - {x: 0, y: 0}
-    - {x: 1, y: 1}
-    Next:
-    - {x: 1, y: 1}
-    - {x: 2, y: 2}
-    - {x: 3, y: 3}
-  - Name: grandma
-    Text: hell nah!
-    Response1: 
-    Option1: 0
-    Response2: 
-    Option2: 0
-    Response3: 
-    Option3: 0
-    isEnd: 1
-    AIResponse: 0
-    giveMoney: 0
-    Prior:
-    - {x: 1, y: 2}
-    Next: []
-  - Name: grandma
-    Text: ok.
-    Response1: 
-    Option1: 0
-    Response2: 
-    Option2: 0
-    Response3: 
-    Option3: 0
-    isEnd: 1
-    AIResponse: 1
-    giveMoney: 20
-    Prior:
-    - {x: 1, y: 3}
     Next: []
   Positions:
-  - {x: 426.875, y: 714.8125}
-  - {x: 876.875, y: 714.8125}
-  - {x: 1501.8125, y: 719.875}
-  - {x: 1484.9375, y: 382.375}
+  - {x: 386.4375, y: 403.3125}
+  - {x: 836.4375, y: 403.3125}

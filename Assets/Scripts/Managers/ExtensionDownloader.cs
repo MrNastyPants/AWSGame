@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class ExtensionDownloader : MonoBehaviour
 {
@@ -10,7 +11,6 @@ public class ExtensionDownloader : MonoBehaviour
         //FOR ANY UPDAWGS LOOKING AT THIS FILE
         //streamingAssets is a special Unity Folder dont change name pls!
         string sourcePath = Path.Combine(Application.streamingAssetsPath, fileName);
-
 
         string destinationPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile), "Downloads", fileName);
 
@@ -40,22 +40,20 @@ public class ExtensionDownloader : MonoBehaviour
             Debug.LogError($"Failed to download the extension: {ex.Message}");
         }
     }
-    private System.Collections.IEnumerator DownloadStreamingAssetsFile(string sourcePath, string destinationPath)
-    {
-        using (WWW www = new WWW(sourcePath))
-        {
-            yield return www;
 
-            if (string.IsNullOrEmpty(www.error))
-            {
-                File.WriteAllBytes(destinationPath, www.bytes);
-                Debug.Log($"Extension file copied to: {destinationPath}");
-                Application.OpenURL("file://" + Path.GetDirectoryName(destinationPath));
-            }
-            else
-            {
-                Debug.LogError($"Error downloading file: {www.error}");
-            }
+    private System.Collections.IEnumerator DownloadStreamingAssetsFile(string sourcePath, string destinationPath){
+        //Initialize Variables
+        using UnityWebRequest www = UnityWebRequest.Get(sourcePath);
+        yield return www;
+
+        //Copies the Extension File if there is no errors present.
+        if (string.IsNullOrEmpty(www.error)) {
+            File.WriteAllBytes(destinationPath, www.downloadHandler.data);
+            Debug.Log($"Extension file copied to: {destinationPath}");
+            Application.OpenURL("file://" + Path.GetDirectoryName(destinationPath));
+        } else {
+            Debug.LogError($"Error downloading file: {www.error}");
         }
+        
     }
 }

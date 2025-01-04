@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,9 +52,21 @@ public class HUDManager : MonoBehaviour
     public void OpenMenu(int value) {
         for (int i = 0; i < Menues.Count; i++) Menues[i].SetActive(i == value);
     }
-    public void OpenDialogue(ResponseOutPut npc) {
+    public bool ToggleIpad() {
+        //Closes the Menu
+        if (Menues[2].activeInHierarchy) {
+            OpenMenu(0);
+            return true;
+        }
+
+        //Opens the Menu
+        OpenMenu(2);
+        return false;
+        
+    }
+    public void OpenDialogue(ResponseOutPut npc, NPCPrompt prompt) {
         OpenMenu(1);
-        ChatManager.InitializeDialogue(npc);
+        ChatManager.InitializeDialogue(npc, prompt);
     }
     public void UpdateMoney(float amount) { 
         Money.text = "Money: $" + amount.ToString("###.00");
