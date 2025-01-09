@@ -1,0 +1,47 @@
+﻿body {
+    font-family: 'Press Start 2P', sans-serif; /* Retro-style font */
+    background-color: #88c070; /* Emerald green background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+}
+
+.container {
+    text-align: center;
+    border: 3px solid #306850; /* Darker green border */
+    background-color: #f8f8f0; /* Pale yellow background */
+    padding: 10px;
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 16px;
+    color: #306850; /* Dark green text */
+    margin: 0;
+}
+
+p {
+    font-size: 12px;
+    color: #306850;
+}
+
+button {
+    font-size: 12px;
+    color: #f8f8f0;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+    button:hover {
+        opacity: 0.9; /* Slight dimming effect */
+    }
+
+body {
+}
+
