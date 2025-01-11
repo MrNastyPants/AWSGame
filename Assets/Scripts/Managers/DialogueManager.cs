@@ -1,3 +1,5 @@
+using Amazon.BedrockRuntime;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,20 +33,23 @@ public class DialogueManager : MonoBehaviour {
     }
 
     [Header("Read-Only Stats")]
-    [SerializeField] private NPC _currentNPC;
-    [SerializeField] private int _state = 0, _optionSelected = 0, _optionCount = 0;
+    [SerializeField] private ResponseOutPut _currentResponse;
+    [SerializeField] private int _currentID = 0, _optionSelected = 0, _optionCount = 0;
     [SerializeField] private bool _finishedTyping = false;
     [SerializeField] private bool _openOptions = false;
     [SerializeField] private bool _optionsOpened = false;
+    [SerializeField] private bool _exitAfter = false;
+    [SerializeField] private string _specialComment = "";
+    [SerializeField] private int _responseRating = -1;
     [SerializeField] Coroutine _typingCoroutine;
+
+    [Header("AI Variables")]
+    private AmazonBedrockRuntimeClient client;
 
     //Controls the Dialogue Window
     private void Update() {
         //Continues if the key is pressed
-        if (Input.GetKeyDown(KeyCode.E)) {
-            if (_openOptions && _finishedTyping) ControlOptions();
-            else TypingSpeedUp();
-        }
+        if (Input.GetKeyDown(KeyCode.E)) StateMachine(_currentID);
         //Moves up and down the options
         if (_optionsOpened) {
             //Moves up and down the list
@@ -55,11 +60,14 @@ public class DialogueManager : MonoBehaviour {
         }
 
     }
+    private void Awake() {
+        client = AWSManager.TurnOnAI();
+    }
 
-    //Initializes the Dialogue tree
-    public void InitializeDialogue(NPC npc) {
+    //Initializes and controls the Dialogue tree
+    public void InitializeDialogue(ResponseOutPut response, NPCPrompt prompt) {
         //Exits because nothing was sent over
-        if (npc.DialogueTree.Count == 0) {
+        if (response == null || response.OutPutResponse.Count == 0) {
             StopDialogue();
             return;
         }
@@ -68,49 +76,72 @@ public class DialogueManager : MonoBehaviour {
         Options.SetActive(false);
 
         //Initializes the vlaues
-        _state = -1;
-        _currentNPC = npc;
+        _currentResponse = response;
         _openOptions = false;
         _finishedTyping = false;
+        _exitAfter = false;
+        _specialComment = "";
+        _responseRating = -1;
+
+        //Sends in the Info to get the AI Response
+        if (GameManager.Manager.heldItem != null && GameManager.Manager.heldItem.Name != "" && prompt._runPrompt) CallTheAI(prompt);
 
         //Runs the Dialogue
-        NextDialogue();
+        NextDialogue(0);
     }
-    public void StopDialogue() {
-        GameManager.Manager.StopDialogue();
+    public void StopDialogue() {      
+        //Stops Everything
+        GameManager.Manager.StopDialogue(_responseRating);
     }
-    private void NextDialogue() {
-        //Increments the state
-        _state++;
+    private void StateMachine(int ID) {
+        //Stops the typing co-routine and sets the text to the full text
+        if (!_finishedTyping) {
+            StopCoroutine(_typingCoroutine);
+            MainText.text = _currentResponse.OutPutResponse[ID].AIResponse ? _specialComment : _currentResponse.OutPutResponse[ID].Text;
+            _finishedTyping = true;
+            return;
+        }
 
-        //Checks to make sure it is not the end
-        if (_state + 1 > _currentNPC.DialogueTree.Count) {
+        //The options are open and is taking in the input
+        if (_openOptions) {
+            ControlOptions(ID);
+            return;
+        }
+
+        //Checks to see if it's finished with the tree
+        if (_currentResponse.OutPutResponse[ID].isEnd || _exitAfter) {
             StopDialogue();
             return;
         }
 
+        //Checks the Response Rating and sets the pass fail parameters
+        int nextOp = _currentResponse.OutPutResponse[ID].Option1;
+        if (_currentResponse.OutPutResponse[ID].AIResponse)
+            nextOp = _responseRating > 5 ? _currentResponse.OutPutResponse[ID].Option1 : _currentResponse.OutPutResponse[ID].Option2;
+
+        //Continues on to the next Dialogue Branch
+        NextDialogue(nextOp);
+    }
+    private void NextDialogue(int ID) {
+        //Checks the Current ID
+        _currentID = ID;
+
+        //Gives the player Money if there is any
+        if (_currentResponse.OutPutResponse[ID].giveMoney != 0) GivePlayerMoney(_currentResponse.OutPutResponse[ID].giveMoney);
+
         //Starts the typing
-        Name.text = _currentNPC.DialogueTree[_state].Name;
-        _typingCoroutine = StartCoroutine(TypeText(_currentNPC.DialogueTree[_state].Text));
+        Name.text = _currentResponse.OutPutResponse[ID].Name;
+        string speech = _currentResponse.OutPutResponse[ID].Text;
 
-        //Checks to see if there were Options
-        _openOptions = _currentNPC.DialogueTree[_state].Response1 != "";
+        //Checks to see if there is an AI response and if not check to see if there were options
+        if (_currentResponse.OutPutResponse[ID].AIResponse) speech = AIResponse();
+        else _openOptions = _currentResponse.OutPutResponse[ID].Response1 != "";
 
+        //Starts typing
+        _typingCoroutine = StartCoroutine(TypeText(speech));
     }
 
-    //Speed up Typing
-    private void TypingSpeedUp() {
-        //Goes on to the next panel
-        if (_finishedTyping) {
-            NextDialogue();
-            return;
-        }
-
-        //Stops the typing co-routine and sets the text to the full text
-        StopCoroutine(_typingCoroutine);
-        MainText.text = _currentNPC.DialogueTree[_state].Text;
-        _finishedTyping = true;
-    }
+    //Types in the text
     IEnumerator TypeText(string text) {
         //Initializes Variables
         var newString = "";
@@ -128,42 +159,43 @@ public class DialogueManager : MonoBehaviour {
     }
 
     //Options
-    private void ControlOptions() {
+    private void ControlOptions(int ID) {
         //Opens up the Options
         if (_optionsOpened == false) {
-            OpenOptions();
+            OpenOptions(ID);
             return;
         }
 
         //Selects the Option
-        switch (_optionSelected) {
-            case 0: _state = _currentNPC.DialogueTree[_state].Option1 - 1; break;
-            case 1: _state = _currentNPC.DialogueTree[_state].Option2 - 1; break;
-            case 2: _state = _currentNPC.DialogueTree[_state].Option3 - 1; break;
+        var _optionSelected = 0; 
+        switch (this._optionSelected) {
+            case 0: _optionSelected = _currentResponse.OutPutResponse[ID].Option1; break;
+            case 1: _optionSelected = _currentResponse.OutPutResponse[ID].Option2; break;
+            case 2: _optionSelected = _currentResponse.OutPutResponse[ID].Option3; break;
         }
 
         //Closes the Options
         CloseOptions();
-        NextDialogue();
+        NextDialogue(_optionSelected);
     }
-    private void OpenOptions() {
+    private void OpenOptions(int ID) {
         //Sets up the Options Menu
         Options.SetActive(true);
         _optionSelected = 0;
 
         // Option 1 always active
         Option1.gameObject.SetActive(true);
-        Option1.transform.Find("Text").GetComponent<Text>().text = _currentNPC.DialogueTree[_state].Response1;
+        Option1.transform.Find("Text").GetComponent<Text>().text = _currentResponse.OutPutResponse[ID].Response1;
         _optionCount = 1;
 
         //Option 2
-        Option2.gameObject.SetActive(_currentNPC.DialogueTree[_state].Response2 != "");
-        Option2.transform.Find("Text").GetComponent<Text>().text = _currentNPC.DialogueTree[_state].Response2;
+        Option2.gameObject.SetActive(_currentResponse.OutPutResponse[ID].Response2 != "");
+        Option2.transform.Find("Text").GetComponent<Text>().text = _currentResponse.OutPutResponse[ID].Response2;
         _optionCount = Option2.gameObject.activeInHierarchy ? _optionCount + 1 : _optionCount;
 
         //Option 3
-        Option3.gameObject.SetActive(_currentNPC.DialogueTree[_state].Response3 != "");
-        Option3.transform.Find("Text").GetComponent<Text>().text = _currentNPC.DialogueTree[_state].Response3;
+        Option3.gameObject.SetActive(_currentResponse.OutPutResponse[ID].Response3 != "");
+        Option3.transform.Find("Text").GetComponent<Text>().text = _currentResponse.OutPutResponse[ID].Response3;
         _optionCount = Option3.gameObject.activeInHierarchy ? _optionCount + 1 : _optionCount;
 
         //Returns that it was opened
@@ -192,4 +224,48 @@ public class DialogueManager : MonoBehaviour {
         }
     }
 
+    //AI Functions
+    private void CallTheAI(NPCPrompt prompt) {
+        //Calls the Ai
+        print("Calling the AI");
+
+        //Sets the Variables
+        string finalPrompt = AWSManager.BuildPrompt(prompt, GameManager.Manager.heldItem.Name);
+        string scorePrompt = AWSManager.BuildRating(prompt, GameManager.Manager.heldItem.Name);
+        _specialComment = "";
+        _responseRating = -1;
+
+        //Sends the Information to the AI and awaits for a response
+        AWSManager.Titan(finalPrompt, client, ReceiveAIInput);
+        AWSManager.Titan(scorePrompt, client, ReceiveAIScore, true);
+    }
+    private void GivePlayerMoney(float Amount) {
+        GameManager.Manager.PlayerMoney += Amount;
+        GameManager.Manager.HUD.UpdateMoney(GameManager.Manager.PlayerMoney);
+    }
+    private string ExtractDigits(string text) {
+        return string.Join("", System.Text.RegularExpressions.Regex.Matches(text, @"\d+"));
+    }
+    private string AIResponse() {
+        //Checks to see if they are holding an item. 
+        if (_specialComment == "") {
+            _exitAfter = true;
+            return _specialComment = "You aren't holding anything. Come back when you have something for me!";
+        }
+
+        return _specialComment;
+    }
+
+    //External Functions
+    public void ReceiveAIInput() {
+        _specialComment = AWSManager.AIFinal;
+    }
+    public void ReceiveAIScore() {
+        //Retreives the number from the Score
+        string score = AWSManager.AIScore;
+
+        //Checks to make sure there is only digits left and parses it into an int
+        string temp = ExtractDigits(score);
+        _responseRating = int.Parse(temp);
+    }
 }

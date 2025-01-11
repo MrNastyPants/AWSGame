@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3761baca96e56b84ab23c5bb55d32b8f, type: 3}
+  m_Name: Quest
+  m_EditorClassIdentifier: 
+  OutPutResponse:
+  - Name: grandma
+    Text: oh dear! you have come back so quickly. did you order something from amazon
+      like i asked?
+    Response1: Yes!
+    Option1: 1
+    Response2: Not yet.
+    Option2: 2
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior: []
+    Next:
+    - {x: 1, y: 1}
+    - {x: 2, y: 2}
+  - Name: grandma
+    Text: I need to feed my cats! lets see what you got me!
+    Response1: 
+    Option1: 3
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 0, y: 1}
+    Next:
+    - {x: 3, y: 0}
+  - Name: grandma
+    Text: well, what are you waiting for, go on!
+    Response1: 
+    Option1: 0
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 1
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 0, y: 2}
+    Next: []
+  - Name: grandma
+    Text: 
+    Response1: 
+    Option1: 4
+    Response2: 
+    Option2: 6
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 1
+    giveMoney: 0
+    Prior:
+    - {x: 1, y: 0}
+    Next:
+    - {x: 4, y: 1}
+    - {x: 6, y: 2}
+  - Name: grandma
+    Text: lets give it a shot! Kitty kitty! look what I got for you! Come get a bite!
+    Response1: 
+    Option1: 5
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 3, y: 1}
+    Next:
+    - {x: 5, y: 0}
+  - Name: grandma
+    Text: Will you be dear and go out there in the real world and find me my cats?
+      you can use the amazon app to help you along the way!
+    Response1: 
+    Option1: 0
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 1
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 4, y: 0}
+    - {x: 6, y: 0}
+    Next: []
+  - Name: Grandma
+    Text: I can't use this to lure my kittys. I doubt they're around anyhow.
+    Response1: 
+    Option1: 5
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 3, y: 2}
+    Next:
+    - {x: 5, y: 0}
+  Positions:
+  - {x: -561.15625, y: 647.3125}
+  - {x: 221.84375, y: 692.875}
+  - {x: 215.09375, y: 384.0625}
+  - {x: 670.71875, y: 703}
+  - {x: 1205.6562, y: 703}
+  - {x: 1570.7188, y: 703}
+  - {x: 1203.9688, y: 419.5}

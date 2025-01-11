@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,11 @@ public class GameManager : MonoBehaviour
     private HUDManager _hud;
     private PlayerController _player;
     private CameraController _camera;
+
+    [Header("Inventory")]
+    [SerializeField] public Item heldItem;
+    [SerializeField] public List<Item> Inventory = new List<Item>();
+    [SerializeField] public float PlayerMoney = 0;
 
     //Properties
     public HUDManager HUD {
@@ -93,14 +99,17 @@ public class GameManager : MonoBehaviour
     }
 
     //Public Functions
-    public void StartDialogue(NPC npc) {
+    [SerializeField] private NPC _speaker;
+    public void StartDialogue(ResponseOutPut npc, NPCPrompt prompt, NPC speaker) {
         //Starts the dialogue
-        Player.CanMove = false;             //Stops the player from moving
-        HUD.OpenDialogue(npc);                    //Opens the dialogue window
+        Player.CanMove = false;                 //Stops the player from moving
+        HUD.OpenDialogue(npc, prompt);          //Opens the dialogue window
+        _speaker = speaker;
     }
-    public void StopDialogue() { 
+    public void StopDialogue(int rating) { 
         //Stops the dialogue
         Player.CanMove = true;              //Frees the player
         HUD.OpenMenu(0);                    //Closes the dialogue menu
+        _speaker.FinishedTalking(rating);
     }
 }

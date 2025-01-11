@@ -9,13 +9,19 @@ public class PlayerController : PlayerStats
     private bool moving = false;
     
     public void Update() {
+        //Opens the Ipad
+        if (Input.GetKeyDown(KeyCode.Tab)) {
+            //Toggles the Can Move
+            CanMove = GameManager.Manager.HUD.ToggleIpad();
+        }
+
         //Exits if the player cannot move
         if (!CanMove) return;
 
         //Moves the Player
         Movement();
 
-        //Interacts with the door.
+        //Interacts with the interactable.
         if (Input.GetKeyDown(KeyCode.E) && Interactor != null) {
             Interactor.GetComponent<Interactable>().Interact();
         }

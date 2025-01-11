@@ -6,8 +6,6 @@ public class PlayerStats : MonoBehaviour
 {
     [Header("General Stats")]
     [SerializeField] public bool CanMove = true;
-    [SerializeField] private float _walkingSpeed = 1;
-    [SerializeField] private float _runningSpeed = 2;
     [SerializeField] protected float currentSpeed = 1;
 
     [Header("Read Only Stats")]
@@ -32,7 +30,7 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Camera Clipping")]
     [SerializeField] protected LayerMask _wallMask;
-    [SerializeField] protected List<RaycastHit> _blockingObjects = new List<RaycastHit>();
+    [SerializeField] protected List<RaycastHit> _blockingObjects = new();
     [SerializeField] protected Transform _camera {
         get => GameManager.Manager.Camera.transform;
     }
