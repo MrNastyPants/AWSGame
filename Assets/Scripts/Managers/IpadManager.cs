@@ -106,6 +106,9 @@ public class IpadManager : MonoBehaviour
             return;
         }
 
+        //Checks to make sure there is an item they are purchasing
+        if(_currentItem.Name == "" || _currentItem.Price == 0) return;
+
         //If they do have enough money
         GameManager.Manager.PlayerMoney -= _currentItem.Price;
         GameManager.Manager.Inventory.Add(new Item(_currentItem.Name, _currentItem.Price));
@@ -129,8 +132,6 @@ public class IpadManager : MonoBehaviour
         _pageNumber = page;
         var startID = _pageNumber * 5;
 
-        print("Refreshed");
-
         //Enters the Information
         for (int i = 0; i < 5; i++) {
             //Fills in the item if there is one in the Inventory
@@ -141,7 +142,8 @@ public class IpadManager : MonoBehaviour
                 ItemHolder.Find("Item_" + i + "/ProductPrice").GetComponent<Text>().text = "$" + GameManager.Manager.Inventory[startID + i].Price.ToString("#0.00");
 
                 //Checks to see if it's equipped
-                FixEquip(i, GameManager.Manager.Inventory[startID + i].Name == GameManager.Manager.heldItem.Name);
+                if(GameManager.Manager.HeldItem != null)
+                FixEquip(i, GameManager.Manager.Inventory[startID + i].Name == GameManager.Manager.HeldItem.Name);
 
                 continue;
             }
@@ -164,14 +166,14 @@ public class IpadManager : MonoBehaviour
         var item = GameManager.Manager.Inventory[(_pageNumber * 5) + buttonID];
 
         //Checks to make sure they aren't holding the same item
-        if (GameManager.Manager.heldItem != null && GameManager.Manager.heldItem.Name == item.Name) {
-            GameManager.Manager.heldItem = null;
+        if (GameManager.Manager.HeldItem != null && GameManager.Manager.HeldItem.Name == item.Name) {
+            GameManager.Manager.HeldItem = null;
             FixEquip(buttonID, false);
             return;
         }
 
         //Equipped an Item
-        GameManager.Manager.heldItem = new Item(item.Name, item.Price);
+        GameManager.Manager.HeldItem = new Item(item.Name, item.Price);
         FixEquip(buttonID, true);
     }
     private void FixEquip(int id, bool active) {

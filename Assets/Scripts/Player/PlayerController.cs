@@ -10,7 +10,7 @@ public class PlayerController : PlayerStats
     
     public void Update() {
         //Opens the Ipad
-        if (Input.GetKeyDown(KeyCode.Tab)) {
+        if (Input.GetKeyDown(KeyCode.Tab) && !GameManager.Manager.IsTalking()) {
             //Toggles the Can Move
             CanMove = GameManager.Manager.HUD.ToggleIpad();
         }
@@ -39,11 +39,13 @@ public class PlayerController : PlayerStats
         //Returns if the values are zero
         if (moving || (horizontal == 0 && vertical == 0)) return;
 
-        //Creates the new direction
+        //Creates the new direction and Rotates the player
         Vector3Int newDir = vertical == 0 ? new Vector3Int(horizontal > 0f ? 1 : -1, 0, 0) : new Vector3Int(0, 0, vertical > 0f ? 1 : -1);
+        Mesh.transform.rotation = Quaternion.LookRotation(newDir);
 
-        //Interactable Item Detected
+        //Block Item Detected
         if (Physics.Raycast(transform.position + (Vector3.up * 0.25f), newDir, out var hit, 1, collisionMask)) {
+            //Interactable Item detected
             if(hit.collider.GetComponent<Interactable>() != null) Interactor = hit.collider.gameObject;
             return;
         }
@@ -53,9 +55,6 @@ public class PlayerController : PlayerStats
 
         //Starts the Movement
         StartCoroutine(Move(newDir));
-
-        //Sets the Mesh Rotation
-        Mesh.transform.rotation = Quaternion.LookRotation(newDir);
     }
 
     public IEnumerator Move(Vector3Int direction) {
@@ -104,5 +103,14 @@ public class PlayerController : PlayerStats
             obj.transform.GetComponent<WallHider>().HideWalls(true);
             _blockingObjects.Add(obj);
         }
+    }
+
+    //Public Functions
+    public void ChangeCarry(bool carrying) {
+        //Sets the Animation to change
+        Anim.SetBool("Holding_Item", carrying);
+
+        //Enables the Box that the player will carry
+        Package.SetActive(carrying);
     }
 }

@@ -84,7 +84,7 @@ public class DialogueManager : MonoBehaviour {
         _responseRating = -1;
 
         //Sends in the Info to get the AI Response
-        if (GameManager.Manager.heldItem != null && GameManager.Manager.heldItem.Name != "" && prompt._runPrompt) CallTheAI(prompt);
+        if (GameManager.Manager.HeldItem != null && GameManager.Manager.HeldItem.Name != "" && prompt._runPrompt) CallTheAI(prompt);
 
         //Runs the Dialogue
         NextDialogue(0);
@@ -230,8 +230,8 @@ public class DialogueManager : MonoBehaviour {
         print("Calling the AI");
 
         //Sets the Variables
-        string finalPrompt = AWSManager.BuildPrompt(prompt, GameManager.Manager.heldItem.Name);
-        string scorePrompt = AWSManager.BuildRating(prompt, GameManager.Manager.heldItem.Name);
+        string finalPrompt = AWSManager.BuildPrompt(prompt, GameManager.Manager.HeldItem.Name);
+        string scorePrompt = AWSManager.BuildRating(prompt, GameManager.Manager.HeldItem.Name);
         _specialComment = "";
         _responseRating = -1;
 
@@ -253,6 +253,10 @@ public class DialogueManager : MonoBehaviour {
             return _specialComment = "You aren't holding anything. Come back when you have something for me!";
         }
 
+        //Removes the Item that the player is holding
+        GameManager.Manager.GiveUpEquippedItem();
+
+        //Returns the AI Response
         return _specialComment;
     }
 

@@ -932,9 +932,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d94ad5959fe744eb31b3d29ce95cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heldItem:
-    Name: 
-    Price: 0
   Inventory: []
   PlayerMoney: 30
   _speaker: {fileID: 0}
@@ -11843,9 +11840,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 164696268705572228, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 164696268705572228, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
+      propertyPath: m_Color.g
+      value: 0.58431375
+      objectReference: {fileID: 0}
+    - target: {fileID: 164696268705572228, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9607844
+      objectReference: {fileID: 0}
     - target: {fileID: 3173417107453946268, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
       propertyPath: m_Name
       value: InGameCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528414396326490085, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1d0def22b74413d4abce7da97b46d40d, type: 3}
+    - target: {fileID: 5108227743509788942, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5263032817814496501, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6418382557568087945, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
       propertyPath: m_Pivot.x

@@ -15,13 +15,24 @@ public class GameManager : MonoBehaviour
     private HUDManager _hud;
     private PlayerController _player;
     private CameraController _camera;
+    private Item _heldItem;
 
     [Header("Inventory")]
-    [SerializeField] public Item heldItem;
     [SerializeField] public List<Item> Inventory = new List<Item>();
     [SerializeField] public float PlayerMoney = 0;
 
+
     //Properties
+    public Item HeldItem {
+        get => _heldItem;
+        set {
+            //Changes the Animation for the Player
+            Player.ChangeCarry(value != null);
+
+            //Sets the Value
+            _heldItem = value;
+        }
+    }
     public HUDManager HUD {
         get {
             //Checks to see if a HUD already exists
@@ -111,5 +122,12 @@ public class GameManager : MonoBehaviour
         Player.CanMove = true;              //Frees the player
         HUD.OpenMenu(0);                    //Closes the dialogue menu
         _speaker.FinishedTalking(rating);
+        _speaker = null;
     }
+    public void GiveUpEquippedItem() {
+        //Removes the Held Item then destroys the held item
+        Inventory.Remove(HeldItem);
+        HeldItem = null;
+    }
+    public bool IsTalking() { return _speaker != null; }
 }

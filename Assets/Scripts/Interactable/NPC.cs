@@ -48,6 +48,9 @@ public class NPC : Interactable{
 
     //Interaction Functions
     public override void Interact() {
+        //Turns to face the player
+        transform.Find("Mesh").LookAt(GameManager.Manager.Player.transform.position);
+
         //First time 
         if (_firstTime && _introResponse != null) {
             GameManager.Manager.StartDialogue(_introResponse, _thisNPC, this);

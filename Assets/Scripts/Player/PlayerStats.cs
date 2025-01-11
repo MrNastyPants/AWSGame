@@ -38,6 +38,7 @@ public class PlayerStats : MonoBehaviour
     [Header("References")]
     [SerializeField] private Animator _anim;
     [SerializeField] private GameObject _mesh;
+    [SerializeField] private GameObject _package;
 
     //Properties
     protected GameObject Mesh {
@@ -45,6 +46,9 @@ public class PlayerStats : MonoBehaviour
     }
     protected Animator Anim {
         get => _anim != null ? _anim : _anim = transform.Find("Mesh/Skeleton").GetComponent<Animator>();
+    }
+    protected GameObject Package {
+        get => _package != null ? _package : _package = transform.Find("Mesh/Package").gameObject;
     }
     
 }
