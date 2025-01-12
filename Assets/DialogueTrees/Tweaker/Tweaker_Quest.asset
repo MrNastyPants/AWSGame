@@ -1,0 +1,434 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3761baca96e56b84ab23c5bb55d32b8f, type: 3}
+  m_Name: Tweaker_Quest
+  m_EditorClassIdentifier: 
+  OutPutResponse:
+  - Name: local tweaker
+    Text: 'holy moly a fricken fire!! '
+    Response1: 
+    Option1: 1
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior: []
+    Next:
+    - {x: 1, y: 0}
+  - Name: you
+    Text: hey.
+    Response1: 
+    Option1: 2
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 0, y: 0}
+    Next:
+    - {x: 2, y: 0}
+  - Name: local tweaker
+    Text: ahhhhhhhhh!!! who are you and how did you get in here!
+    Response1: 
+    Option1: 3
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 1, y: 0}
+    Next:
+    - {x: 3, y: 0}
+  - Name: you
+    Text: i never left... err.. also the door is open.
+    Response1: 
+    Option1: 4
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 2, y: 0}
+    Next:
+    - {x: 4, y: 0}
+  - Name: local tweaker
+    Text: oooohh, aight fo'sho. my dojo is your dojo.
+    Response1: 
+    Option1: 5
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 3, y: 0}
+    Next:
+    - {x: 5, y: 0}
+  - Name: local tweaker
+    Text: so... what's the haps big chief.
+    Response1: 
+    Option1: 6
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 4, y: 0}
+    Next:
+    - {x: 6, y: 0}
+  - Name: you
+    Text: i'm here because your oven is on fire.
+    Response1: 
+    Option1: 7
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 5, y: 0}
+    Next:
+    - {x: 7, y: 0}
+  - Name: local tweaker
+    Text: oh yeah facts! wait, i don't got an album called 'oven' i got other fire
+      freestyles tho. what you feelin, i'll put something on?
+    Response1: 
+    Option1: 8
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 6, y: 0}
+    Next:
+    - {x: 8, y: 0}
+  - Name: you
+    Text: no, like your food is literally on fire!
+    Response1: 
+    Option1: 9
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 7, y: 0}
+    Next:
+    - {x: 9, y: 0}
+  - Name: local tweaker
+    Text: oh.
+    Response1: 
+    Option1: 10
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 8, y: 0}
+    Next:
+    - {x: 10, y: 0}
+  - Name: local tweaker
+    Text: ahhhhhh!!! yo you got something for this mess?!
+    Response1: yes!
+    Option1: 11
+    Response2: umm, not yet...
+    Option2: 13
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 9, y: 0}
+    Next:
+    - {x: 11, y: 1}
+    - {x: 13, y: 2}
+  - Name: local tweaker
+    Text: bet bet! let's see it!
+    Response1: 
+    Option1: 12
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 10, y: 1}
+    Next:
+    - {x: 12, y: 0}
+  - Name: local tweaker
+    Text: 
+    Response1: 
+    Option1: 19
+    Response2: 
+    Option2: 20
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 1
+    giveMoney: 0
+    Prior:
+    - {x: 11, y: 0}
+    Next:
+    - {x: 19, y: 1}
+    - {x: 20, y: 2}
+  - Name: local tweaker
+    Text: so what? you just came to chat or something?
+    Response1: yes?
+    Option1: 14
+    Response2: nah, i'm on it sorry.
+    Option2: 15
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 10, y: 2}
+    Next:
+    - {x: 14, y: 1}
+    - {x: 15, y: 2}
+  - Name: local tweaker
+    Text: i'm not in the mood. i usually am, I just know there is something important
+      I should be worried about right now. can you come chat later?
+    Response1: 
+    Option1: 18
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 13, y: 1}
+    Next:
+    - {x: 18, y: 0}
+  - Name: local tweaker
+    Text: okay. see you then. I gotta get back to cookin.
+    Response1: 
+    Option1: 16
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 13, y: 2}
+    Next:
+    - {x: 16, y: 0}
+  - Name: local tweaker
+    Text: ....
+    Response1: 
+    Option1: 17
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 15, y: 0}
+    - {x: 18, y: 0}
+    Next:
+    - {x: 17, y: 0}
+  - Name: local tweaker
+    Text: ahhhhhhhhhhhh
+    Response1: 
+    Option1: 0
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 1
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 16, y: 0}
+    Next: []
+  - Name: you
+    Text: ok.
+    Response1: 
+    Option1: 16
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 14, y: 0}
+    Next:
+    - {x: 16, y: 0}
+  - Name: local tweaker
+    Text: ah fo'sho, fo'sho. nothing to be stressing about.
+    Response1: 
+    Option1: 22
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 12, y: 1}
+    Next:
+    - {x: 22, y: 0}
+  - Name: 
+    Text: 
+    Response1: 
+    Option1: 21
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 12, y: 2}
+    Next:
+    - {x: 21, y: 0}
+  - Name: local tweaker
+    Text: i don't think it worked!
+    Response1: 
+    Option1: 24
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 20, y: 0}
+    Next:
+    - {x: 24, y: 0}
+  - Name: local tweaker
+    Text: 'ey yo, here is some extra cash fo the help. '
+    Response1: 
+    Option1: 23
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 15
+    Prior:
+    - {x: 19, y: 0}
+    Next:
+    - {x: 23, y: 0}
+  - Name: local tweaker
+    Text: 'it''s all i got, i don''t got a job. '
+    Response1: 
+    Option1: 0
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 1
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 22, y: 0}
+    Next: []
+  - Name: you
+    Text: it's gonna explode!
+    Response1: 
+    Option1: 25
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 21, y: 0}
+    Next:
+    - {x: 25, y: 0}
+  - Name: local tweaker
+    Text: holy moly! let's get out of here!
+    Response1: 
+    Option1: 0
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 1
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 24, y: 0}
+    Next: []
+  Positions:
+  - {x: -1570.4509, y: 727.11346}
+  - {x: -1120.4512, y: 727.11346}
+  - {x: -670.45105, y: 727.11346}
+  - {x: -220.45105, y: 727.11346}
+  - {x: 229.54883, y: 727.11346}
+  - {x: 679.5488, y: 727.11346}
+  - {x: 1129.5488, y: 727.11346}
+  - {x: 1579.5488, y: 727.11346}
+  - {x: 2029.5488, y: 727.11346}
+  - {x: 2479.5488, y: 727.11346}
+  - {x: 2929.5488, y: 727.11346}
+  - {x: 3489.0342, y: 730.53143}
+  - {x: 3939.0342, y: 730.53143}
+  - {x: 3480.331, y: 423.41553}
+  - {x: 4075.9116, y: 440.823}
+  - {x: 4068.4512, y: 148.62769}
+  - {x: 4518.451, y: 148.62769}
+  - {x: 4968.451, y: 148.62769}
+  - {x: 4517.313, y: 437.09277}
+  - {x: 4521.042, y: 953.0969}
+  - {x: 4521.042, y: 689.4995}
+  - {x: 4971.042, y: 689.4995}
+  - {x: 4971.147, y: 956.82715}
+  - {x: 5421.147, y: 956.82715}
+  - {x: 5390.167, y: 682.03937}
+  - {x: 5840.167, y: 682.03937}

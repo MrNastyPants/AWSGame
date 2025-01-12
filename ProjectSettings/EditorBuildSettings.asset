@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Outside.unity
     guid: 0dbb5a609ff18c5409fd0baa5b182297
+  - enabled: 1
+    path: Assets/Scenes/Tweaker's House.unity
+    guid: 2117520aace0aa4438636a0faad20bcb
   m_configObjects: {}

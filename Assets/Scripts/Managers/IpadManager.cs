@@ -45,14 +45,24 @@ public class IpadManager : MonoBehaviour
         //Opens the correct window
         if (WindowChange) FocusChange();
     }
+    private void OnEnable() {
+        OpenApp(0);
+    }
 
     //Opens the correct window
     public void OpenApp(int ID) {
         //Activates the Apps
         for (int i = 0; i < Apps.Count; i++) Apps[i].SetActive(i == ID);
 
+        //Checks to make sure the Game Manager is not missing
+        if(GameManager.Manager != null && GameManager.Manager.HUD != null)
+            GameManager.Manager.HUD.PlaySound("App");
+
         //Refreshes the Inventory
         if (ID == 4) RefreshInventory(0);
+
+        //If it opens on the Amazon Web Page App
+        if (ID == 1) FocusChange();
     }
 
     [Header("Amazon")]
@@ -110,6 +120,7 @@ public class IpadManager : MonoBehaviour
         if(_currentItem.Name == "" || _currentItem.Price == 0) return;
 
         //If they do have enough money
+        GameManager.Manager.HUD.PlaySound("Cash");
         GameManager.Manager.PlayerMoney -= _currentItem.Price;
         GameManager.Manager.Inventory.Add(new Item(_currentItem.Name, _currentItem.Price));
 
@@ -160,12 +171,13 @@ public class IpadManager : MonoBehaviour
     }
     public void FlipPage(int direction) {
         RefreshInventory(_pageNumber + direction);
+        GameManager.Manager.HUD.PlaySound("Switch");
     }
     public void EquipItem(int buttonID) {
         //Initialize Variables
         var item = GameManager.Manager.Inventory[(_pageNumber * 5) + buttonID];
 
-        //Checks to make sure they aren't holding the same item
+        //Unequipes the Item if double clicking on the button
         if (GameManager.Manager.HeldItem != null && GameManager.Manager.HeldItem.Name == item.Name) {
             GameManager.Manager.HeldItem = null;
             FixEquip(buttonID, false);

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,6 +29,9 @@ public class GameManager : MonoBehaviour
         set {
             //Changes the Animation for the Player
             Player.ChangeCarry(value != null);
+
+            //Plays the Sound
+            HUD.PlaySound("Box");
 
             //Sets the Value
             _heldItem = value;
@@ -86,27 +90,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private bool _currentFocus = true;
-    private bool FocusChange {
-        get {
-            bool current = Application.isFocused;
-
-            //Returns false if it's the same value
-            if (current == _currentFocus) return false;
-
-            //Not open
-            if (!current) return _currentFocus = current;
-
-            return _currentFocus = current;
-        }
-    }
-
-    private void FixedUpdate() {
-        if (FocusChange) {
-            string amazonDesc = GUIUtility.systemCopyBuffer;
-            print(amazonDesc);
-        }
+    private void Start() {
+        //Iniatializes the Level Manager
+        LevelManager.Init();
+        SceneManager.sceneLoaded += LevelManager.OnSceneLoaded;
     }
 
     //Public Functions

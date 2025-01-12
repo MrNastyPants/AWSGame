@@ -54,8 +54,14 @@ public class DialogueManager : MonoBehaviour {
         if (_optionsOpened) {
             //Moves up and down the list
             HoverOption(_optionSelected, false);
-            if (Input.GetKeyDown(KeyCode.W)) _optionSelected = _optionSelected - 1 != -1 ? _optionSelected - 1 : _optionCount - 1;
-            if (Input.GetKeyDown(KeyCode.S)) _optionSelected = (_optionSelected + 1) % _optionCount;
+            if (Input.GetKeyDown(KeyCode.W)) {
+                GameManager.Manager.HUD.PlaySound("Switch");
+                _optionSelected = _optionSelected - 1 != -1 ? _optionSelected - 1 : _optionCount - 1;
+            }
+            if (Input.GetKeyDown(KeyCode.S)) {
+                GameManager.Manager.HUD.PlaySound("Switch");
+                _optionSelected = (_optionSelected + 1) % _optionCount;
+            }
             HoverOption(_optionSelected);
         }
 
@@ -99,6 +105,7 @@ public class DialogueManager : MonoBehaviour {
             StopCoroutine(_typingCoroutine);
             MainText.text = _currentResponse.OutPutResponse[ID].AIResponse ? _specialComment : _currentResponse.OutPutResponse[ID].Text;
             _finishedTyping = true;
+            GameManager.Manager.HUD.StopSound();
             return;
         }
 
@@ -132,6 +139,7 @@ public class DialogueManager : MonoBehaviour {
         //Starts the typing
         Name.text = _currentResponse.OutPutResponse[ID].Name;
         string speech = _currentResponse.OutPutResponse[ID].Text;
+        GameManager.Manager.HUD.PlaySound("Typing");
 
         //Checks to see if there is an AI response and if not check to see if there were options
         if (_currentResponse.OutPutResponse[ID].AIResponse) speech = AIResponse();
@@ -156,6 +164,7 @@ public class DialogueManager : MonoBehaviour {
 
         //Is done typing
         _finishedTyping = true;
+        GameManager.Manager.HUD.StopSound();
     }
 
     //Options
@@ -203,6 +212,8 @@ public class DialogueManager : MonoBehaviour {
         _optionsOpened = true;
     }
     private void CloseOptions() {
+        //Plays the Sound
+        GameManager.Manager.HUD.PlaySound("Select");
         HoverOption(_optionSelected, false);
         Options.SetActive(false);
         _optionsOpened = false;
@@ -240,6 +251,7 @@ public class DialogueManager : MonoBehaviour {
         AWSManager.Titan(scorePrompt, client, ReceiveAIScore, true);
     }
     private void GivePlayerMoney(float Amount) {
+        GameManager.Manager.HUD.PlaySound("Cash");
         GameManager.Manager.PlayerMoney += Amount;
         GameManager.Manager.HUD.UpdateMoney(GameManager.Manager.PlayerMoney);
     }

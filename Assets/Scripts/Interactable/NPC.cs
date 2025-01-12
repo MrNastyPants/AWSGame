@@ -10,6 +10,7 @@ public class NPC : Interactable{
     [Header("References")]
     [SerializeField] private GameObject _alertBox;
     [SerializeField] public NPCPrompt _thisNPC;
+    [SerializeField] private AudioSource _alertSound;
 
     [Header("Dialogue Settings")]
     [SerializeField] ResponseOutPut _introResponse;
@@ -18,9 +19,19 @@ public class NPC : Interactable{
     [SerializeField] List<ResponseOutPut> _goodResponseQueue = new();           //The player successfully gave them an item
     [SerializeField] List<ResponseOutPut> _badResponseQueue = new();            //The player unsuccessfully game them an item [DEFAULT]
 
+    [Header("Animation")]
+    [SerializeField] private bool _animate = false;
+    [SerializeField] private Animator _anim;
+
     //Properties
+    protected Animator Anim { 
+        get => _anim != null ? _anim : _anim = transform.Find("Mesh").GetComponent<Animator>();
+    }
     protected GameObject AlertBox {
         get => _alertBox != null ? _alertBox : _alertBox = transform.Find("Alert").gameObject;
+    }
+    protected AudioSource AlertSound {
+        get => _alertSound != null ? _alertSound : _alertSound = GetComponent<AudioSource>();
     }
 
     //Functions
@@ -42,8 +53,11 @@ public class NPC : Interactable{
             _thisNPC._runPrompt = false;
         }
 
-        //Sends an Alert
-        print("Received: " + rating + ". You " + (_passedQuest ? "Passed!" : "did not pass."));
+        //Ends the Talking Animation
+        if (_animate) {
+            Anim.SetBool("Talking", false);
+            transform.Find("Mesh").LookAt(transform.position - transform.right);
+        }
     }
 
     //Interaction Functions
@@ -54,6 +68,10 @@ public class NPC : Interactable{
         //First time 
         if (_firstTime && _introResponse != null) {
             GameManager.Manager.StartDialogue(_introResponse, _thisNPC, this);
+
+            //Starts the Talking Animation
+            if (_animate) Anim.SetBool("Talking", true);
+
             return;
         }
 
@@ -62,6 +80,10 @@ public class NPC : Interactable{
             _thisNPC._runPrompt = true;
             _checkQuest = true;
             GameManager.Manager.StartDialogue(_questResponse, _thisNPC, this);
+
+            //Starts the Talking Animation
+            if (_animate) Anim.SetBool("Talking", true);
+
             return;
         }
 
@@ -77,7 +99,9 @@ public class NPC : Interactable{
         GameManager.Manager.StartDialogue(temp[responseID], _thisNPC, this);
     }
     public override void Hover() {
+        if (_finishedQuest) return;
         AlertBox.SetActive(true);
+        _alertSound.Play();
     }
     public override void EndHover() {
         AlertBox.SetActive(false);

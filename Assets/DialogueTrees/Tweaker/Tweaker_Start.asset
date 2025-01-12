@@ -1,0 +1,181 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3761baca96e56b84ab23c5bb55d32b8f, type: 3}
+  m_Name: Tweaker_Start
+  m_EditorClassIdentifier: 
+  OutPutResponse:
+  - Name: Local Tweaker
+    Text: Ey Yo bro!! there is a fire! wow, wait, how'd you get in here?!
+    Response1: Door was open.
+    Option1: 1
+    Response2: I was already in here.
+    Option2: 1
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior: []
+    Next:
+    - {x: 1, y: 1}
+    - {x: 1, y: 2}
+  - Name: you
+    Text: I am actually looking for my grandma's cats. have you seen them around?
+    Response1: 
+    Option1: 2
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 0, y: 1}
+    - {x: 0, y: 2}
+    Next:
+    - {x: 2, y: 0}
+  - Name: local tweaker
+    Text: sum cats? nah I haven't seen 'em. hold on, what'd they look like?
+    Response1: ok.
+    Option1: 3
+    Response2: What about the fire?
+    Option2: 7
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 1, y: 0}
+    Next:
+    - {x: 3, y: 1}
+    - {x: 7, y: 2}
+  - Name: you
+    Text: there is two cats. one of them is orange and the other one is pitch black.
+      i don't remember their names but my grandma probably calls them kitty kitty.
+    Response1: 
+    Option1: 4
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 2, y: 1}
+    Next:
+    - {x: 4, y: 0}
+  - Name: local tweaker
+    Text: that's cute. nah sorry bro, I was hella preoccupied all day makin' something'
+      to munch on you know?
+    Response1: 
+    Option1: 5
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 3, y: 0}
+    Next:
+    - {x: 5, y: 0}
+  - Name: local tweaker
+    Text: i'll let you know if I see them around tho. they sound chill as hell not
+      gonna lie.
+    Response1: 
+    Option1: 6
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 4, y: 0}
+    Next:
+    - {x: 6, y: 0}
+  - Name: local tweaker
+    Text: low-key bro, i gotta get back to cookin n' shee--.
+    Response1: 
+    Option1: 7
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 5, y: 0}
+    Next:
+    - {x: 7, y: 0}
+  - Name: local tweaker
+    Text: . . . .
+    Response1: 
+    Option1: 8
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 6, y: 0}
+    - {x: 2, y: 2}
+    Next:
+    - {x: 8, y: 0}
+  - Name: local tweaker
+    Text: 'fire!! fire!! yo you gotta get me something to turn this off! '
+    Response1: 
+    Option1: 9
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 0
+    AIResponse: 0
+    giveMoney: 0
+    Prior:
+    - {x: 7, y: 0}
+    Next:
+    - {x: 9, y: 0}
+  - Name: local tweaker
+    Text: here's a 20. get me something quick!
+    Response1: 
+    Option1: 0
+    Response2: 
+    Option2: 0
+    Response3: 
+    Option3: 0
+    isEnd: 1
+    AIResponse: 0
+    giveMoney: 20
+    Prior:
+    - {x: 8, y: 0}
+    Next: []
+  Positions:
+  - {x: -631.36926, y: 555.6675}
+  - {x: 41.036987, y: 573.5425}
+  - {x: 491.037, y: 573.5425}
+  - {x: 1155.5094, y: 807.29956}
+  - {x: 1605.5094, y: 807.29956}
+  - {x: 2055.5093, y: 807.29956}
+  - {x: 2505.5093, y: 807.29956}
+  - {x: 1323.8787, y: 368.4793}
+  - {x: 1773.8785, y: 368.4793}
+  - {x: 2223.8784, y: 368.4793}

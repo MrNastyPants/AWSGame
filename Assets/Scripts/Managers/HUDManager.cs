@@ -12,7 +12,43 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private DialogueManager _chatManager;
     [SerializeField] private Text _money;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioSource _fxaudioSource;
+    [SerializeField] private AudioClip _typingSound, _selectSound, _switchSound, _cashSound;
+    [SerializeField] private AudioClip _powerOnSound, _powerOffSound, _boxSound, _noCashSound, _appClickSound;
+
     //Properties
+    private AudioSource MainSource {
+        get {
+            //Creates a new Audio Source if one doesn't exist already
+            if (_audioSource == null) {
+                var temp = gameObject.AddComponent<AudioSource>();
+                _audioSource = temp;
+
+                //Sets the Parameters
+                temp.playOnAwake = false;
+                temp.volume = 0.2f;
+                temp.loop = true;
+            }
+            return _audioSource;
+        }
+    }
+    private AudioSource FXSource {
+        get {
+            //Creates a new Audio Source if one doesn't exist already
+            if (_fxaudioSource == null) {
+                var temp = gameObject.AddComponent<AudioSource>();
+                _fxaudioSource = temp;
+
+                //Sets the Parameters
+                temp.playOnAwake = false;
+                temp.volume = 0.2f;
+                temp.loop = false;
+            }
+            return _fxaudioSource;
+        }
+    }
     private Text ToolTip {
         get => _toolTip != null ? _toolTip : transform.Find("HUD/ToolTip").GetComponent<Text>();
     }
@@ -55,11 +91,13 @@ public class HUDManager : MonoBehaviour
     public bool ToggleIpad() {
         //Closes the Menu
         if (Menues[2].activeInHierarchy) {
+            PlaySound("PowerOff");
             OpenMenu(0);
             return true;
         }
 
-        //Opens the Menu
+        //Opens the Ipad Menu
+        PlaySound("PowerOn");
         OpenMenu(2);
         return false;
         
@@ -70,5 +108,30 @@ public class HUDManager : MonoBehaviour
     }
     public void UpdateMoney(float amount) { 
         Money.text = "Money: $" + amount.ToString("###.00");
+    }
+
+    //Sound
+    public void PlaySound(string type) {
+        //Selects the type of sound the source will play
+        switch (type) {
+            case "Typing":
+                MainSource.clip = _typingSound;
+                MainSource.Play();
+                break;
+            case "Select":      FXSource.PlayOneShot(_selectSound); break;
+            case "Switch":      FXSource.PlayOneShot(_switchSound); break;
+            case "Cash":        FXSource.PlayOneShot(_cashSound); break;
+            case "PowerOn":     FXSource.PlayOneShot(_powerOnSound); break;
+            case "PowerOff":    FXSource.PlayOneShot(_powerOffSound); break;
+            case "Box":         FXSource.PlayOneShot(_boxSound); break;
+            case "Error":       FXSource.PlayOneShot(_noCashSound); break;
+            case "App":         FXSource.PlayOneShot(_appClickSound); break;
+
+                //Nothing happens if the sound doesn't exist
+            default: break;
+        }
+    }
+    public void StopSound() {
+        MainSource.Stop();
     }
 }
