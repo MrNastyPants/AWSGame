@@ -14,17 +14,17 @@ public class NPC : Interactable{
 
     [Header("Dialogue Settings")]
     [SerializeField] ResponseOutPut _introResponse;
-    [SerializeField] private bool _firstTime = true, _finishedQuest = false, _checkQuest = false, _passedQuest = false;
+    [SerializeField] public bool _firstTime = true, _finishedQuest = false, _checkQuest = false, _passedQuest = false;
     [SerializeField] ResponseOutPut _questResponse;
     [SerializeField] List<ResponseOutPut> _goodResponseQueue = new();           //The player successfully gave them an item
     [SerializeField] List<ResponseOutPut> _badResponseQueue = new();            //The player unsuccessfully game them an item [DEFAULT]
 
     [Header("Animation")]
-    [SerializeField] private bool _animate = false;
+    [SerializeField] public bool _animate = false;
     [SerializeField] private Animator _anim;
 
     //Properties
-    protected Animator Anim { 
+    public Animator Anim { 
         get => _anim != null ? _anim : _anim = transform.Find("Mesh").GetComponent<Animator>();
     }
     protected GameObject AlertBox {

@@ -6,7 +6,7 @@ public class Door : Interactable{
 
     [Header("General Door Stats")]
     [SerializeField] private string _sceneName = "";
-    [SerializeField] private bool _isLocked = false;
+    [SerializeField] public bool _isLocked = false;
 
     //Interacts with the object
     public override void Interact() {
@@ -24,7 +24,7 @@ public class Door : Interactable{
     public override void Hover() {
         //Shoots unlock message
         if (_isLocked) {
-            UpdateToolTip("It appears to be locked.");
+            UpdateToolTip("Not safe in there.");
             return;
         }
 

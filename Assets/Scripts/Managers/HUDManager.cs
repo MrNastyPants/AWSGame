@@ -16,7 +16,7 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioSource _fxaudioSource;
     [SerializeField] private AudioClip _typingSound, _selectSound, _switchSound, _cashSound;
-    [SerializeField] private AudioClip _powerOnSound, _powerOffSound, _boxSound, _noCashSound, _appClickSound;
+    [SerializeField] private AudioClip _powerOnSound, _powerOffSound, _boxSound, _noCashSound, _appClickSound, _bombSound;
 
     //Properties
     private AudioSource MainSource {
@@ -107,7 +107,7 @@ public class HUDManager : MonoBehaviour
         ChatManager.InitializeDialogue(npc, prompt);
     }
     public void UpdateMoney(float amount) { 
-        Money.text = "Money: $" + amount.ToString("###.00");
+        Money.text = "Money: $" + amount.ToString("0.00");
     }
 
     //Sound
@@ -126,6 +126,7 @@ public class HUDManager : MonoBehaviour
             case "Box":         FXSource.PlayOneShot(_boxSound); break;
             case "Error":       FXSource.PlayOneShot(_noCashSound); break;
             case "App":         FXSource.PlayOneShot(_appClickSound); break;
+            case "Bomb":        FXSource.PlayOneShot(_bombSound); break;
 
                 //Nothing happens if the sound doesn't exist
             default: break;

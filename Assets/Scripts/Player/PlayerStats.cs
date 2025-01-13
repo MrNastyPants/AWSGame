@@ -45,7 +45,7 @@ public class PlayerStats : MonoBehaviour
         get => _mesh != null ? _mesh : _mesh = transform.Find("Mesh").gameObject;
     }
     protected Animator Anim {
-        get => _anim != null ? _anim : _anim = transform.Find("Mesh/Skeleton").GetComponent<Animator>();
+        get => _anim != null ? _anim : _anim = transform.Find("Mesh").GetComponent<Animator>();
     }
     protected GameObject Package {
         get => _package != null ? _package : _package = transform.Find("Mesh/Package").gameObject;

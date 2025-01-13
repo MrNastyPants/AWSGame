@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Tutorial.unity
-    guid: 942b103cf86b89f4fa097fa52b80ec1f
-  - enabled: 1
     path: Assets/Scenes/Grandma's House.unity
     guid: 87e225558db4bdb4da32d2f597cb5b0d
   - enabled: 1
@@ -20,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tweaker's House.unity
     guid: 2117520aace0aa4438636a0faad20bcb
+  - enabled: 1
+    path: Assets/Scenes/Mover's House.unity
+    guid: 114ba65d62505d04294e72e42ec51f07
   m_configObjects: {}

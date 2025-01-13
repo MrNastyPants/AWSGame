@@ -36,7 +36,7 @@ public class MainMenuController : MonoBehaviour
     public void StartGame() {
         //Loads the scene if the Game Manager Exists
         try {
-            GameManager.Manager.LevelManager.ChangeScene(1);
+            GameManager.Manager.LevelManager.ChangeScene("Grandma's House");
         }
         
         //Creates a Game Manager if it does not exist
@@ -44,5 +44,9 @@ public class MainMenuController : MonoBehaviour
             GameManager.Manager = new GameObject("GameManager").AddComponent<GameManager>();
             GameManager.Manager.LevelManager.ChangeScene(1);
         }
+    }
+    public void QuitGame() {
+        //Exits the Game
+        Application.Quit();
     }
 }
