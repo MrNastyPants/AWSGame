@@ -41813,9 +41813,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2020453079905732732, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3173417107453946268, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
       propertyPath: m_Name
       value: InGameCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320925122831532336, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584629777791351541, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108227743509788942, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5263032817814496501, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6418382557568087945, guid: 3ecad2be33c02aa44bdafaba33a0c6cb, type: 3}
       propertyPath: m_Pivot.x

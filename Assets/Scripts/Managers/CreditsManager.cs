@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class CreditsScroll : MonoBehaviour
 {
@@ -11,32 +12,46 @@ public class CreditsScroll : MonoBehaviour
     public RectTransform rectTransform; 
 
     private string creditsText =
-        "<size=150><align=center><b>Project Management</b></align></size>\n\n" +
-        "<size=100><align=center>Uriel Munguia</align></size>\n\n" +
+        "<size=100><align=center>To be continued...</align></size>\n\n" +
+        "<size=100><align=center>Thank you for playing.</align></size>\n\n" +
 
-        "<size=150><align=center><b>Game Design</b></align></size>\n\n" +
-        "<size=100><align=center>Uriel Munguia</align></size>\n" +
-        "<size=100><align=center>Brandon Munguia Torres</align></size>\n" +
-        "<size=100><align=center>Michael Nguyen</align></size>\n\n" +
+        "<size=150><align=center><b>Uriel Munguia</b></align></size>\n\n" +
+        "<size=100><align=center>Project Management</align></size>\n" +
+        "<size=100><align=center>Lead Programmer</align></size>\n" +
+        "<size=100><align=center>Lead Game Designer</align></size>\n" +
+        "<size=100><align=center>Art and Animation</align></size>\n" +
 
-        "<size=150><align=center><b>Chrome Extension Designer</b></align></size>\n\n" +
-        "<size=100><align=center>Michael Nguyen</align></size>\n\n" +
+        "<size=150><align=center><b>Brandon Munguia Torres</b></align></size>\n\n" +
+        "<size=100><align=center>Lead AI Programmer</align></size>\n" +
+        "<size=100><align=center>Programmer</align></size>\n" +
+        "<size=100><align=center>Game Designer</align></size>\n" +
+        "<size=100><align=center>Music Designer</align></size>\n\n" +
 
-        "<size=150><align=center><b>Art and Animation</b></align></size>\n\n" +
-        "<size=100><align=center>Uriel Munguia</align></size>\n\n" +
+        "<size=150><align=center><b>Michael Nguyen</b></align></size>\n\n" +
+        "<size=100><align=center>Chrome Extension Creator</align></size>\n" +
+         "<size=100><align=center>Programmer</align></size>\n" +
+         "<size=100><align=center>Game Designer</align></size>\n" +
 
-        "<size=150><align=center><b>Programming and Engineering</b></align></size>\n\n" +
-        "<size=100><align=center>Uriel Munguia</align></size>\n" +
-        "<size=100><align=center>Michael Nguyen</align></size>\n" +
-        "<size=100><align=center>Brandon Munguia Torres</align></size>\n\n" +
+        "<size=100><align=center>Credit to Assets Used.</align></size>\n\n" +
 
         "<size=150><align=center><b>Sound Composers</b></align></size>\n\n" +
-        "<size=100><align=center>Fill in</align></size>\n" +
+        "<size=100><align=center>Royalty Free Sounds-Youtube: Shadows in the Night (Credits)</align></size>\n" +
+        "<size=100><align=center>Jonathan Barretto-Youtube: Original Random (Mover's House)</align></size>\n" +
+        "<size=100><align=center>Music4Video-Youtube: Jazz Background (Tweaker's House CLEAR)</align></size>\n" +
+        "<size=100><align=center>S3pt3mb3rw-Youtube: Deep Thoughts (Outside)</align></size>\n" +
+        "<size=100><align=center>Epic Music Journey-Youtube 8 Bit RPG Battle (Tweaker's House)</align></size>\n" +
+        "<size=100><align=center>Stream Cafe-Youtube Grandma's House (Grandma's House)</align></size>\n" +
 
         "<size=150><align=center><b>3D Artists</b></align></size>\n\n" +
-        "<size=100><align=center>PolyOne Studio on SketchFab - Chibi Base Mesh</align></size>\n" +
+        "<size=100><align=center>PolyOne Studio-SketchFab - Chibi Base Mesh</align></size>\n" +
+        "<size=100><align=center>Merow - Sketchfab Pixel A-Frame</align></size>\n" +
+        "<size=100><align=center>FlipBard-Sketfab Frying Pan with Fried Eggs</align></size>\n" +
+        "<size=100><align=center>Soleil Neige-Sketchfab Pixel Art Bench</align></size>\n" +
+        "<size=100><align=center>Elbolillo-Sketchfab ArmChair</align></size>\n" +
+        "<size=100><align=center>Elbolillo-Sketchfab Debs Others</align></size>\n" +
 
         "<size=150><align=center><b>Special Thanks</b></align></size>\n\n" +
+        "<size=100><align=center>DevPost</align></size>\n" +
         "<size=100><align=center>Amazon Web Services</align></size>\n" +
         "<size=100><align=center>Amazon Titan Text G1 - Premier</align></size>\n";
 
