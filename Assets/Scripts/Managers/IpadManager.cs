@@ -123,6 +123,7 @@ public class IpadManager : MonoBehaviour
         GameManager.Manager.HUD.PlaySound("Cash");
         GameManager.Manager.PlayerMoney -= _currentItem.Price;
         GameManager.Manager.Inventory.Add(new Item(_currentItem.Name, _currentItem.Price));
+        GameManager.Manager.HUD.UpdateMoney(GameManager.Manager.PlayerMoney);
 
         //Opens up the Purchase Screen
         OpenApp(3);
