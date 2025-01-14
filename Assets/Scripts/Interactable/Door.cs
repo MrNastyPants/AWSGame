@@ -5,7 +5,10 @@ using UnityEngine;
 public class Door : Interactable{
 
     [Header("General Door Stats")]
+    [SerializeField] private bool _autoUnlock = false;
+    [SerializeField] private NPC _npc; 
     [SerializeField] private string _sceneName = "";
+    [SerializeField] private string _lockedMessage = "";
     [SerializeField] public bool _isLocked = false;
 
     //Interacts with the object
@@ -20,11 +23,19 @@ public class Door : Interactable{
         GameManager.Manager.LevelManager.ChangeScene(_sceneName);
     }
 
+    private void FixedUpdate() {
+        //Exits if the door is already unlocked
+        if (!_isLocked) return;
+
+        //Checks for the NPC to be with their quest to open
+        if (_autoUnlock && _npc._finishedQuest) _isLocked = false;
+    }
+
     //Starts the Hovering
     public override void Hover() {
         //Shoots unlock message
         if (_isLocked) {
-            UpdateToolTip("Not safe in there.");
+            UpdateToolTip(_lockedMessage);
             return;
         }
 

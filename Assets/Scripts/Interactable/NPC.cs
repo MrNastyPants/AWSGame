@@ -51,6 +51,9 @@ public class NPC : Interactable{
             _finishedQuest = rating != -1;
             _checkQuest = false;
             _thisNPC._runPrompt = false;
+
+            //Updates the UI
+            GameManager.Manager.UpdateQuests(_passedQuest);
         }
 
         //Ends the Talking Animation

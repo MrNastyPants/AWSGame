@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Mover's House.unity
     guid: 114ba65d62505d04294e72e42ec51f07
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 9b8505130b48c774ca40b22e32a1dced
   m_configObjects: {}

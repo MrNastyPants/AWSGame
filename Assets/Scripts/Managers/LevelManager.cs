@@ -26,11 +26,18 @@ public class LevelManager{
 
     //Changinge Scenes
     public void ChangeScene(int scene) {
-        //Changes the Scene of the Game
-        SaveLevel(SceneManager.GetActiveScene().name);
-        SceneManager.LoadScene(scene);
+        //Turns the scene int into a string
+        string sceneName = SceneManager.GetSceneByBuildIndex(scene).name;
+        ChangeScene(sceneName);
     }
     public void ChangeScene(string scene) {
+        //Checks to see if it should load the credits
+        int finalScore = CheckPassedFailed(true) + CheckPassedFailed(false);
+        if (finalScore == 3) {
+            SceneManager.LoadScene("Credits");
+            return;
+        }
+
         //Changes the Scene of the Game
         SaveLevel(SceneManager.GetActiveScene().name);
         SceneManager.LoadScene(scene);
@@ -54,11 +61,43 @@ public class LevelManager{
 
         //Updates the money
         GameManager.Manager.HUD.UpdateMoney(GameManager.Manager.PlayerMoney);
+
+        //Updates the Quests on every level
+        RefreshQuests();
     }
     public void PlacePlayer(Vector3 position, Vector3 lookDirection) { 
         //Sets the position and rotation
         GameManager.Manager.Player.transform.position = position;
         GameManager.Manager.Player.transform.Find("Mesh").transform.LookAt(GameManager.Manager.Player.transform.position + lookDirection);
+    }
+
+    //Quets
+    public void RefreshQuests(bool extra = false, bool pass = true) {
+        //Checks the Quests
+        int passed = CheckPassedFailed(true);
+        int failed = CheckPassedFailed(false);
+
+        //Adds the Extra
+        if (extra) {
+            if (pass) passed++;
+            else failed++;
+        }
+
+        //Scenes it to the HUD
+        GameManager.Manager.HUD.UpdateQuests(passed, failed);
+    }
+    private int CheckPassedFailed(bool passed) {
+        //Initialize Variables
+        int finalScore = 0;
+        int passGrade = passed ? 3 : 2;
+
+        //Checks which ones passed and which ones failed
+        if (_grandmaHouseLevel == passGrade) finalScore++;
+        if (_tweakerHouseLevel == passGrade) finalScore++;
+        if (_moverHouseLevel == passGrade) finalScore++;
+
+        //Returns the Final
+        return finalScore;
     }
 
     //Save Levels
@@ -96,6 +135,9 @@ public class LevelManager{
             par.transform.Find("TweakerDoor").GetComponent<Door>()._isLocked = true;
             par.transform.Find("Tweaker").gameObject.SetActive(true);
         }
+
+        //Changes the Location to Match
+        GameManager.Manager.HUD.UpdateLocation("Apartment Square");
     }
     protected void LoadTweakerHouse() {
         //Sets Variables
@@ -117,12 +159,21 @@ public class LevelManager{
             par.Find("MusicManager").GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Music/Tweaker_Good");
             par.Find("MusicManager").GetComponent<AudioSource>().time = _tweakerHouseMusic;
             par.Find("MusicManager").GetComponent<AudioSource>().Play();
-        } 
+        }
+
+        //Changes the Location to Match
+        GameManager.Manager.HUD.UpdateLocation("Tweaker's House");
     }
     protected void LoadGrandmaHouse() {
         //Sets Variables
         Transform par = GameObject.FindGameObjectWithTag("LevelChanges").transform;
         NPCLoader(par.Find("Grandma").GetComponent<NPC>(), ref _grandmaHouseLevel, ref _grandmaHouseMusic);
+
+        //Unlocks the door
+        if (_grandmaHouseLevel == 3) par.transform.Find("Door").GetComponent<Door>()._isLocked = false;
+
+        //Changes the Location to Match
+        GameManager.Manager.HUD.UpdateLocation("Grandma's House");
     }
     protected void LoadMoverHouse() {
         //Sets Variables
@@ -131,6 +182,9 @@ public class LevelManager{
 
         //Enables the Box 
         if (_moverHouseLevel == 3) par.Find("Package").transform.Find("Mesh").GetComponent<MeshRenderer>().enabled = true;
+
+        //Changes the Location to Match
+        GameManager.Manager.HUD.UpdateLocation("Mover's House");
     }
 
     //Additional Functions

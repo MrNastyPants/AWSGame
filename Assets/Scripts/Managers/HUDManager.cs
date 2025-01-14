@@ -10,7 +10,7 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private Text _toolTip;
     [SerializeField] private List<GameObject> _menues;
     [SerializeField] private DialogueManager _chatManager;
-    [SerializeField] private Text _money;
+    [SerializeField] private Text _money, _location, _quests;
 
     [Header("Sounds")]
     [SerializeField] private AudioSource _audioSource;
@@ -55,6 +55,12 @@ public class HUDManager : MonoBehaviour
     private Text Money {
         get => _money != null ? _money : _money = transform.Find("HUD/Money").GetComponent<Text>();
     }
+    private Text Quests {
+        get => _quests != null ? _quests : _quests = transform.Find("HUD/Quests").GetComponent<Text>();
+    }
+    private Text Location {
+        get => _location != null ? _location : _location = transform.Find("HUD/Location").GetComponent<Text>();
+    }
     private List<GameObject> Menues {
         get {
             //Returns the menues
@@ -84,6 +90,22 @@ public class HUDManager : MonoBehaviour
     //Public Functions
     public void UpdateToolTip(string text) {
         ToolTip.text = text;
+    }
+    public void UpdateLocation(string text) {
+        Location.text = text;
+    }
+    public void UpdateQuests(int passed, int failed) {
+        //Initialize Variables
+        string final = "";
+
+        //Updates the Quests passed
+        if (passed > 0)final += "<color=#00FF00>" + passed.ToString() + "</color> Quests Passed\n";
+        
+        //Updates the Quests failed
+        if (failed > 0) final += "<color=#FF0000>" + failed.ToString() + "</color> Quests Failed";
+
+        //Sends it the UI
+        Quests.text = final;
     }
     public void OpenMenu(int value) {
         for (int i = 0; i < Menues.Count; i++) Menues[i].SetActive(i == value);

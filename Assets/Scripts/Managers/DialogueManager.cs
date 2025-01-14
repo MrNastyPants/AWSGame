@@ -138,6 +138,7 @@ public class DialogueManager : MonoBehaviour {
 
         //Starts the typing
         Name.text = _currentResponse.OutPutResponse[ID].Name;
+        ChangeColor(Name.text);
         string speech = _currentResponse.OutPutResponse[ID].Text;
         GameManager.Manager.HUD.PlaySound("Typing");
 
@@ -147,6 +148,20 @@ public class DialogueManager : MonoBehaviour {
 
         //Starts typing
         _typingCoroutine = StartCoroutine(TypeText(speech));
+    }
+
+    //Aesthetic Options
+    private void ChangeColor(string name) {
+        //Checks to see if it's the player
+        bool _isPlayer = (name.ToLower() == "you");
+
+        //Color Picker
+        Color col = _isPlayer ? new Color(157f / 255f, 206f / 255f, 1f, 0.5f) : new Color(1f, 1f, 1f, 0.5f);
+
+
+        //Changes it back to the normal
+        GetComponent<Image>().color = col;
+        transform.Find("Name").GetComponent<Image>().color = col;
     }
 
     //Types in the text

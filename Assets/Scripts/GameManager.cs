@@ -113,8 +113,19 @@ public class GameManager : MonoBehaviour
     }
     public void GiveUpEquippedItem() {
         //Removes the Held Item then destroys the held item
-        Inventory.Remove(HeldItem);
+        for (int i = 0; i < Inventory.Count; i++) {
+            if (Inventory[i].Name == HeldItem.Name) {
+                Inventory.RemoveAt(i);
+                break;
+            }
+        }
+
+        //Turns the held item off
         HeldItem = null;
     }
     public bool IsTalking() { return _speaker != null; }
+    public void UpdateQuests(bool pass) {
+        //Sends in the extra amount to refresh the UI
+        LevelManager.RefreshQuests(true, pass);
+    }
 }
