@@ -16,8 +16,8 @@ public static class AWSManager
     public const string ModelId = "amazon.titan-text-premier-v1:0";
 
     //General Stats
-    private const string accessKey = "AKIA57VDLLRWBB5LSSWM";
-    private const string accessKeySecret = "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";
+    public static string accessKey = "";
+    public static string accessKeySecret = "";
 
     //Wakes up the AI
     public static AmazonBedrockRuntimeClient TurnOnAI() {
